@@ -1,0 +1,28 @@
+{
+    "folders": [
+        {
+            "name": "root",
+            "path": "./"
+        },
+        {
+            "name": "app demo 1",
+            "path": "Apps/appdemo1"
+        },
+        {
+            "name": "components",
+            "path": "libs/components"
+        }
+    ],
+    "settings": {
+        "files.exclude": {
+            "Apps": true,
+            "libs": true,
+            "**/.git": true,
+            "**/.svn": true,
+            "**/.hg": true,
+            "**/CVS": true,
+            "**/.DS_Store": true,
+            "**/Thumbs.db": true
+        }
+    }
+}
