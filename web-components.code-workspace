@@ -5,18 +5,22 @@
             "path": "./"
         },
         {
-            "name": "app demo 1",
+            "name": "App demo 1",
             "path": "Apps/appdemo1"
         },
         {
-            "name": "components",
-            "path": "libs/components"
+            "name": "React components",
+            "path": "Components/React"
+        },
+        {
+            "name": "Vanilla components",
+            "path": "Components/Vanilla"
         }
     ],
     "settings": {
         "files.exclude": {
+            "Components": true,
             "Apps": true,
-            "libs": true,
             "**/.git": true,
             "**/.svn": true,
             "**/.hg": true,
