@@ -1,3 +1,1 @@
-import Spinbox from "./spinbox/spinbox";
-
-customElements.define('test-spinbox', Spinbox);
+import './main/main.ts';

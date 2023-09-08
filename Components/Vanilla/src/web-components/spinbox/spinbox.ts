@@ -11,7 +11,7 @@ export default class Spinbox extends HTMLElement {
         const templateNode = document.createElement('template');
         templateNode.innerHTML = template;
 
-        let styleNode = document.createElement('style');
+        const styleNode = document.createElement('style');
         styleNode.textContent = styles;
         
 
