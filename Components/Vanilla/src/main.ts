@@ -1,13 +1,9 @@
-import './style.css'
-import {webComponents, WebComponentDetails} from './web-components';
-import './components';
-
-declare global {
-  interface Window {
-    webComponents: Map<string, WebComponentDetails>
-  }
-}
+import './interfaces/window';
+import Application from './application';
 
 
-window.webComponents = webComponents;
+const app = new Application();
 
+window.application = app;
+
+app.init();

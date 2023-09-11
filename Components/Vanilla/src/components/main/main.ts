@@ -1,22 +1,42 @@
 import template from './main.html?raw';
 import styles from './main.scss?inline';
+import '../../interfaces/window';
 
 import { ComponentContainer } from './componentContainer/componentContainer';
+import { IApplication } from '../../interfaces/application';
+import { first } from 'rxjs';
 
 
-let appElm = document.getElementById('app');
-if (appElm) {
-    
-    const templateNode = document.createElement('template');
-    templateNode.innerHTML = template;
+export class MainComponent {
 
-    const styleNode = document.createElement('style');
-    styleNode.textContent = styles;
+    constructor(private _app : IApplication) {
+        _app.initObservable
+            .pipe(first())
+            .subscribe( () => {
+                this.init();
+            });
+    }
 
-    appElm.appendChild(styleNode);
-    appElm.appendChild(templateNode.content.cloneNode(true));
+    init() {
+        let appElm = document.getElementById('app');
+        if (appElm) {
+            
+            const templateNode = document.createElement('template');
+            templateNode.innerHTML = template;
+        
+            const styleNode = document.createElement('style');
+            styleNode.textContent = styles;
+        
+            appElm.appendChild(styleNode);
+            appElm.appendChild(templateNode.content.cloneNode(true));
+                
+            const webComponents = window.webComponents;
 
-    new ComponentContainer(appElm, 'test-spinbox');
-    new ComponentContainer(appElm, 'test-spinbox');
-    new ComponentContainer(appElm, 'test-spinbox');
- }
+            for (let [key] of webComponents) {
+                console.log(key);
+                new ComponentContainer(appElm, key);
+            }
+         }
+    }
+}
+
