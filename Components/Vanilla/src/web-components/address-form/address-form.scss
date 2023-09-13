@@ -1,0 +1,36 @@
+.address-form {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+
+    .address-line {
+        display: flex;
+        position: relative;
+        flex-direction: row;
+        margin-top: 1em;
+        // margin-bottom: 0.5em;
+
+        .group {
+            display: flex;
+            flex-direction: row;
+            position: relative;
+            width: 100%;
+        }
+
+        .horz-spacer {
+            min-width: 1em;
+        }
+
+        .label-item {
+            display: block;
+            min-width: 8em;
+            box-sizing: border-box;
+        }
+
+        .field-item {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    }
+}
