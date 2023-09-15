@@ -8,7 +8,7 @@
     border: 1px black dotted;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 900px) {
     .componentContainer {
         width: calc(100% - 4em);
         left: 1em;
@@ -16,7 +16,7 @@
     }
 }
 
-@media screen and (max-width: 1400px) and (min-width: 700px) {
+@media screen and (max-width: 1400px) and (min-width: 900px) {
     .componentContainer {
         width: calc(50% - 4em);
         left: 1em;
