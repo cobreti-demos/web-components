@@ -1,9 +1,9 @@
 
 import { IApplication } from "./interfaces/application";
-import { webComponents } from "./web-components";
 import './interfaces/window';
-import { BehaviorSubject, Observable, Subject } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import { MainComponent } from "./components/main/main";
+import { WebComponents } from "./web-components";
 
 export default class Application implements IApplication {
 
@@ -14,8 +14,8 @@ export default class Application implements IApplication {
     }
 
     init() {
-        window.webComponents = webComponents;
 
+        WebComponents.registerComponents();
         this._mainComponent = new MainComponent(this);
 
         this._initSubject.next(this);

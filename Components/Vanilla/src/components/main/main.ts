@@ -2,7 +2,6 @@ import template from './main.html?raw';
 import styles from './main.scss?inline';
 import '../../interfaces/window';
 
-import { ComponentContainer } from './componentContainer/componentContainer';
 import { IApplication } from '../../interfaces/application';
 import { first } from 'rxjs';
 
@@ -28,14 +27,7 @@ export class MainComponent {
             styleNode.textContent = styles;
         
             appElm.appendChild(styleNode);
-            appElm.appendChild(templateNode.content.cloneNode(true));
-                
-            const webComponents = window.webComponents;
-
-            for (let [key] of webComponents) {
-                console.log(key);
-                new ComponentContainer(appElm, key);
-            }
+            appElm.appendChild(templateNode.content.cloneNode(true));               
          }
     }
 }
