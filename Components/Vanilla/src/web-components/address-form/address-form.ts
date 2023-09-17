@@ -4,6 +4,7 @@ import styles from './address-form.scss?inline';
 import { AddressFormState } from './address-form-state';
 import { StateEngine } from '../../state-engine';
 
+
 export default class AddressForm extends HTMLElement {
 
     readonly _debouceTime = 500;
@@ -51,6 +52,16 @@ export default class AddressForm extends HTMLElement {
                 .pipe(debounceTime(this._debouceTime))
                 .subscribe(ev => this.onCityChanged(cityElm, ev));
         }
+
+        this._state.stateChangeObservable
+            .subscribe((data) => {
+                this.dispatchEvent(new CustomEvent('state-changed', {
+                    detail: {
+                        changes: data.changes,
+                        state: data.state
+                    }
+                }))
+            });
     }
 
     onPostalCodeChanged(elm: HTMLInputElement, ev: Event) {
@@ -72,6 +83,10 @@ export default class AddressForm extends HTMLElement {
         this.setState({
             city: elm.value
         });
+    }
+
+    connectedCallback() {
+        console.log('connected');
     }
 
     private setState(newState: AddressFormState) {

@@ -29,6 +29,11 @@ export class MainComponent {
             appElm.appendChild(styleNode);
             appElm.appendChild(templateNode.content.cloneNode(true));               
          }
+
+         const testAddressForm = document.getElementById('test-address-form');
+         testAddressForm?.addEventListener('state-changed', (ev) => {
+            console.log(ev);
+         });
     }
 }
 
