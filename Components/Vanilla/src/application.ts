@@ -1,6 +1,6 @@
 
 import { IApplication } from "./interfaces/application";
-import './interfaces/window';
+import '@interfaces/window';
 import { BehaviorSubject, Observable } from "rxjs";
 import { MainComponent } from "./components/main/main";
 import { WebComponents } from "./web-components";

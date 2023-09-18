@@ -1,8 +1,8 @@
 import template from './main.html?raw';
 import styles from './main.scss?inline';
-import '../../interfaces/window';
+import '@interfaces/window';
 
-import { IApplication } from '../../interfaces/application';
+import { IApplication } from '@interfaces/application';
 import { first } from 'rxjs';
 
 

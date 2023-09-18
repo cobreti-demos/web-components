@@ -1,4 +1,4 @@
-import './interfaces/window';
+import '@interfaces/window';
 import Application from './application';
 
 

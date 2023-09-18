@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import sassDts from 'vite-plugin-sass-dts'
+import path from 'node:path';
 
 export default defineConfig({
    server: {
@@ -8,5 +9,10 @@ export default defineConfig({
    },
    plugins: [
     sassDts()
-   ]
+   ],
+   resolve: {
+      alias: {
+         '@interfaces': path.resolve(__dirname, './src/interfaces')
+      }
+   }
 });
