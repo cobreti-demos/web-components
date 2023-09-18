@@ -12,7 +12,8 @@ export default defineConfig({
    ],
    resolve: {
       alias: {
-         '@interfaces': path.resolve(__dirname, './src/interfaces')
+         '@interfaces': path.resolve(__dirname, './src/app/interfaces'),
+         '@web-components': path.resolve(__dirname, './src/web-components')
       }
    }
 });

@@ -21,7 +21,9 @@
 
     "baseUrl": "./src",
     "paths": {
-      "@interfaces/*": ["interfaces/*"]
+      "@interfaces/*": ["app/interfaces/*"],
+      "@web-components/*": ["web-components/*"],
+      "@web-components": ["web-components/index.ts"]
     }
   },
   "include": ["src"]
