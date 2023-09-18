@@ -4,7 +4,6 @@ export function stateDiff<STATETYPE extends {}>(newState: STATETYPE, oldState: S
 
     let changes : STATETYPE = {} as STATETYPE;
 
-    const oldStateKeys = new Set(Object.keys(oldState) as StateTypeKeys);
     const newStateKeys = new Set(Object.keys(newState) as StateTypeKeys);
 
     newStateKeys.forEach( k => {

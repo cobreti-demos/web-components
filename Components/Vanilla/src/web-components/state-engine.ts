@@ -2,6 +2,7 @@ import { Observable, Subject, debounceTime } from "rxjs";
 import { stateDiff } from "./state-diff";
 
 export interface StateChanges<STATETYPE> {
+    oldState: STATETYPE,
     state: STATETYPE,
     changes: STATETYPE
 }
@@ -41,9 +42,11 @@ export class StateEngine<STATETYPE extends {}> {
 
     onTick() {
         const changes = stateDiff(this._state, this._lastDispatchedState);
+        const oldState = this._lastDispatchedState;
         this._lastDispatchedState = {...this.state};
 
         this._dispatchUpdateSubject.next({
+            oldState,
             state: this._state,
             changes
         });
