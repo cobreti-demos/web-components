@@ -9,7 +9,7 @@ import { first } from 'rxjs';
 export class MainComponent {
 
     constructor(private _app : IApplication) {
-        _app.initObservable
+        this._app.initObservable
             .pipe(first())
             .subscribe( () => {
                 this.init();
