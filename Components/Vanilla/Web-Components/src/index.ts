@@ -6,3 +6,6 @@ export class WebComponents {
         customElements.define('test-address-form', AddressForm);
     }
 }
+
+
+WebComponents.registerComponents();
