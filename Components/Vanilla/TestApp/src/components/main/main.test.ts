@@ -153,6 +153,7 @@ describe('MainComponent', async () => {
         }
     });
 
+
     test('console log called when event triggered', async() => {
         const { app, initSubject } = createDummyApplication();
 
@@ -169,17 +170,14 @@ describe('MainComponent', async () => {
 
             initSubject.next(app);
 
-            const mainComponentElm = app.rootElm?.querySelectorAll('.form-container');
+            const spyConsoleLog = vi.spyOn(console, 'log');
             const ev = new mockedDOM.window.CustomEvent('state-changed', {
                 bubbles: false
             });
 
-
-
-
             formElm.dispatchEvent(ev);
 
-            expect(mainComponentElm).toHaveLength(1);
+            expect(spyConsoleLog).toBeCalled();
         }
     });
 

@@ -30,12 +30,12 @@ export class MainComponent {
             rootElm.appendChild(templateNode.content.cloneNode(true));
 
             const testAddressForm = rootElm.querySelectorAll('.form');//document.getElementById('test-form');
-            if (testAddressForm.length > 0)
-                testAddressForm.forEach( (formElm) => {
-                    formElm.addEventListener('state-changed', (ev) => {
-                        console.log(ev);
-                    });
-                })
+
+            testAddressForm.forEach( (formElm) => {
+                formElm.addEventListener('state-changed', (ev) => {
+                    console.log(ev);
+                });
+            })
          }
     }
 }
