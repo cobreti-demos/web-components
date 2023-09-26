@@ -5,7 +5,6 @@ import { BehaviorSubject, Observable } from "rxjs";
 import { MainComponent } from "./components/main/main";
 
 
-const webComponentsJsonUrl = '/web-components.json';
 
 
 export interface WebComponentsEntry {
@@ -15,6 +14,7 @@ export interface WebComponentsEntry {
 
 export class Application implements IApplication {
 
+    private readonly  _webComponentsJsonUrl = '/web-components.json';
     private _initSubject = new BehaviorSubject<IApplication>(this);
     private _mainComponent: MainComponent | undefined;
 
@@ -33,10 +33,10 @@ export class Application implements IApplication {
     private async loadWebComponents() {
 
         try {
-            const response = await fetch(webComponentsJsonUrl);
+            const response = await fetch(this._webComponentsJsonUrl);
 
             if (!response.ok) {
-                throw new Error(`unable to load ${webComponentsJsonUrl}`);
+                throw new Error(`unable to load ${this._webComponentsJsonUrl}`);
             }
 
             const text = await response.text();
@@ -49,7 +49,7 @@ export class Application implements IApplication {
                 document.head.append(scriptElem);
             });
         
-                }
+        }
         catch (error) {
             console.error(error);
         }
