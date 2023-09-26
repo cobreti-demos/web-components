@@ -123,4 +123,21 @@ describe('Application', () => {
         expect(mockedBehaviorSubject).toHaveBeenCalled();
         expect(mockedBehaviorSubject).toHaveBeenCalledTimes(1);
     });
+
+    test('rootElm returns null if no root id found', async () => {
+        const app = new Application();
+        await app.init();
+
+        expect(app.rootElm).toBeNull();
+    });
+
+    test('rootElm returns the element with id root', async () => {
+        mockedDOM = new JSDOM("<div id='root'></div>");
+        global.document = mockedDOM.window.document;
+
+        const app = new Application();
+        await app.init();
+
+        expect(app.rootElm).not.toBeNull();
+    });
 })

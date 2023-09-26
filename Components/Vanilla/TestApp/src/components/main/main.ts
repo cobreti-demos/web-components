@@ -17,8 +17,8 @@ export class MainComponent {
     }
 
     init() {
-        let appElm = document.getElementById('app');
-        if (appElm) {
+        let rootElm = this._app.rootElm;
+        if (rootElm) {
             
             const templateNode = document.createElement('template');
             templateNode.innerHTML = template;
@@ -26,14 +26,17 @@ export class MainComponent {
             const styleNode = document.createElement('style');
             styleNode.textContent = styles;
         
-            appElm.appendChild(styleNode);
-            appElm.appendChild(templateNode.content.cloneNode(true));               
-         }
+            rootElm.appendChild(styleNode);
+            rootElm.appendChild(templateNode.content.cloneNode(true));
 
-         const testAddressForm = document.getElementById('test-address-form');
-         testAddressForm?.addEventListener('state-changed', (ev) => {
-            console.log(ev);
-         });
+            const testAddressForm = rootElm.querySelectorAll('.form');//document.getElementById('test-form');
+            if (testAddressForm.length > 0)
+                testAddressForm.forEach( (formElm) => {
+                    formElm.addEventListener('state-changed', (ev) => {
+                        console.log(ev);
+                    });
+                })
+         }
     }
 }
 

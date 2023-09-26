@@ -56,4 +56,6 @@ export class Application implements IApplication {
     }
 
     get initObservable() : Observable<IApplication|null> { return this._initSubject; }
+
+    get rootElm(): HTMLElement | null { return document.getElementById('root') }
 }
