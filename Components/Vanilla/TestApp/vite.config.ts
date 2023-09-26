@@ -1,18 +1,23 @@
-import { defineConfig } from 'vite'
+import {defineConfig} from 'vitest/config'
 import sassDts from 'vite-plugin-sass-dts'
-import path from 'node:path';
+import {resolve} from "path";
 
 export default defineConfig({
-   server: {
-    port: 8101,
-    host: "0.0.0.0"
-   },
-   plugins: [
-    sassDts()
-   ],
-   resolve: {
-      alias: {
-         '@interfaces': path.resolve(__dirname, './src/interfaces'),
-      }
-   }
+    test: {
+        coverage: {
+            provider: 'istanbul'
+        }
+    },
+    server: {
+        port: 8101,
+        host: "0.0.0.0"
+    },
+    plugins: [
+        sassDts()
+    ],
+    resolve: {
+        alias: {
+            '@interfaces': resolve(__dirname, './src/interfaces'),
+        }
+    }
 });
