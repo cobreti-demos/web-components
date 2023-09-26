@@ -10,8 +10,8 @@ export class MainComponent {
 
     constructor(private _app : IApplication) {
         this._app.initObservable
-            .pipe(first())
-            .subscribe( () => {
+            .pipe(first(x => x != null))
+            .subscribe( (appInstance) => {
                 this.init();
             });
     }

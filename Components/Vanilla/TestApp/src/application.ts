@@ -15,7 +15,7 @@ export interface WebComponentsEntry {
 export class Application implements IApplication {
 
     private readonly  _webComponentsJsonUrl = '/web-components.json';
-    private _initSubject = new BehaviorSubject<IApplication>(this);
+    private _initSubject = new BehaviorSubject<IApplication|null>(null);
     private _mainComponent: MainComponent | undefined;
 
     constructor() {
@@ -55,5 +55,5 @@ export class Application implements IApplication {
         }
     }
 
-    get initObservable() : Observable<IApplication> { return this._initSubject; }
+    get initObservable() : Observable<IApplication|null> { return this._initSubject; }
 }
