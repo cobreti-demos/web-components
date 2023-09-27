@@ -1,92 +1,73 @@
-import { Subject, debounceTime, fromEvent, takeUntil } from 'rxjs';
+import {Subject, debounceTime, fromEvent, takeUntil, Observable} from 'rxjs';
 import template from './address-form.html?raw';
 import styles from './address-form.scss?inline';
 import { AddressFormState } from './address-form-state';
 import { StateEngine } from '../state-engine';
 
 
-export default class AddressForm extends HTMLElement {
+export class AddressForm {
 
-    readonly _debounceTime = 500;
+    private _debounceTime = 500;
 
-    _shadowRoot: ShadowRoot | null;
-
-    _state: StateEngine<AddressFormState> = new StateEngine<AddressFormState>({});
-    _disconnected$ = new Subject<void>();
+    private _stateEngine: StateEngine<AddressFormState> = new StateEngine<AddressFormState>({});
+    private _disconnected$ = new Subject<void>();
+    private _dispatchEvent$ = new Subject<Event>();
 
     constructor() {
-        super();
+    }
 
+    get state() : AddressFormState { return this._stateEngine.state; }
+    get debounceTime(): number { return this._debounceTime; }
+
+    get dispatchEventObservable() : Observable<Event> { return this._dispatchEvent$; }
+
+    connectedCallback(parent: ParentNode) {
         const templateNode = document.createElement('template');
         templateNode.innerHTML = template;
 
         const styleNode = document.createElement('style');
         styleNode.textContent = styles;
-        
 
-        this._shadowRoot = this.attachShadow({mode: 'open'});
-        this._shadowRoot.appendChild(styleNode);
-        this._shadowRoot.appendChild(templateNode.content.cloneNode(true));
-    }
+        parent.appendChild(styleNode);
+        parent.appendChild(templateNode.content.cloneNode(true));
 
-    onPostalCodeChanged(elm: HTMLInputElement, ev: Event) {
-        this.setState({
-            postalCode: elm.value
-        });
-    }
-
-    onAddressChanged(elm: HTMLInputElement, ev: Event) {
-        this.setState({
-            address: elm.value
-        });
-    }
-
-    onCityChanged(elm: HTMLInputElement, ev: Event) {
-        this.setState({
-            city: elm.value
-        });
-    }
-
-    connectedCallback() {
-        if (this._shadowRoot) {
-            const postalCodeElm = this._shadowRoot.getElementById('postal-code') as HTMLInputElement;
-            if (postalCodeElm) {
-                fromEvent(postalCodeElm, 'input')
-                    .pipe(
-                        debounceTime(this._debounceTime),
-                        takeUntil(this._disconnected$))
-                    .subscribe(ev => this.onPostalCodeChanged(postalCodeElm, ev));
-            }
-
-            const addressElm = this._shadowRoot.getElementById('address') as HTMLInputElement;
-            if (addressElm) {
-                fromEvent(addressElm, 'input')
-                    .pipe(
-                        debounceTime(this._debounceTime),
-                        takeUntil(this._disconnected$))
-                    .subscribe(ev => this.onAddressChanged(addressElm, ev));
-            }
-
-            const cityElm = this._shadowRoot.getElementById('city') as HTMLInputElement;
-            if (cityElm) {
-                fromEvent(cityElm, 'input')
-                    .pipe(
-                        debounceTime(this._debounceTime),
-                        takeUntil(this._disconnected$))
-                    .subscribe(ev => this.onCityChanged(cityElm, ev));
-            }
+        const postalCodeElm = parent.querySelector('#postal-code') as HTMLInputElement;
+        if (postalCodeElm) {
+            fromEvent(postalCodeElm, 'input')
+                .pipe(
+                    debounceTime(this._debounceTime),
+                    takeUntil(this._disconnected$))
+                .subscribe(ev => this.onPostalCodeChanged(postalCodeElm, ev));
         }
 
-        this._state.stateChangeObservable
+        const addressElm = parent.querySelector('#address') as HTMLInputElement;
+        if (addressElm) {
+            fromEvent(addressElm, 'input')
+                .pipe(
+                    debounceTime(this._debounceTime),
+                    takeUntil(this._disconnected$))
+                .subscribe(ev => this.onAddressChanged(addressElm, ev));
+        }
+
+        const cityElm = parent.querySelector('#city') as HTMLInputElement;
+        if (cityElm) {
+            fromEvent(cityElm, 'input')
+                .pipe(
+                    debounceTime(this._debounceTime),
+                    takeUntil(this._disconnected$))
+                .subscribe(ev => this.onCityChanged(cityElm, ev));
+        }
+
+        this._stateEngine.stateChangeObservable
             .pipe(takeUntil(this._disconnected$))
             .subscribe((data) => {
-                this.dispatchEvent(new CustomEvent('state-changed', {
+                this._dispatchEvent$.next(new CustomEvent('state-changed', {
                     detail: {
                         oldState: data.oldState,
                         changes: data.changes,
                         state: data.state
                     }
-                }))
+                }));
             });
     }
 
@@ -95,7 +76,26 @@ export default class AddressForm extends HTMLElement {
         this._disconnected$.next();
     }
 
-    private setState(newState: AddressFormState) {
-        this._state.update(newState);
+    private onPostalCodeChanged(elm: HTMLInputElement, ev: Event) {
+        this.updateState({
+            postalCode: elm.value
+        });
     }
+
+    private onAddressChanged(elm: HTMLInputElement, ev: Event) {
+        this.updateState({
+            address: elm.value
+        });
+    }
+
+    private onCityChanged(elm: HTMLInputElement, ev: Event) {
+        this.updateState({
+            city: elm.value
+        });
+    }
+
+    private updateState(newState: AddressFormState) {
+        this._stateEngine.update(newState);
+    }
+
 }
