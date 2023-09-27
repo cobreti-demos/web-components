@@ -7,7 +7,7 @@ import { StateEngine } from '../state-engine';
 
 export default class AddressForm extends HTMLElement {
 
-    readonly _debouceTime = 500;
+    readonly _debounceTime = 500;
 
     _shadowRoot: ShadowRoot | null;
 
@@ -53,7 +53,7 @@ export default class AddressForm extends HTMLElement {
             if (postalCodeElm) {
                 fromEvent(postalCodeElm, 'input')
                     .pipe(
-                        debounceTime(this._debouceTime), 
+                        debounceTime(this._debounceTime),
                         takeUntil(this._disconnected$))
                     .subscribe(ev => this.onPostalCodeChanged(postalCodeElm, ev));
             }
@@ -62,7 +62,7 @@ export default class AddressForm extends HTMLElement {
             if (addressElm) {
                 fromEvent(addressElm, 'input')
                     .pipe(
-                        debounceTime(this._debouceTime),
+                        debounceTime(this._debounceTime),
                         takeUntil(this._disconnected$))
                     .subscribe(ev => this.onAddressChanged(addressElm, ev));
             }
@@ -71,7 +71,7 @@ export default class AddressForm extends HTMLElement {
             if (cityElm) {
                 fromEvent(cityElm, 'input')
                     .pipe(
-                        debounceTime(this._debouceTime),
+                        debounceTime(this._debounceTime),
                         takeUntil(this._disconnected$))
                     .subscribe(ev => this.onCityChanged(cityElm, ev));
             }
