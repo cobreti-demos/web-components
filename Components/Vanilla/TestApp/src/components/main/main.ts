@@ -29,7 +29,7 @@ export class MainComponent {
             rootElm.appendChild(styleNode);
             rootElm.appendChild(templateNode.content.cloneNode(true));
 
-            const testAddressForm = rootElm.querySelectorAll('.form');//document.getElementById('test-form');
+            const testAddressForm = rootElm.querySelectorAll('.form');
 
             testAddressForm.forEach( (formElm) => {
                 formElm.addEventListener('state-changed', (ev) => {

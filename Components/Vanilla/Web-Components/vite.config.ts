@@ -1,8 +1,13 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 import sassDts from 'vite-plugin-sass-dts'
 import { resolve } from 'path';
 
 export default defineConfig({
+   test: {
+     coverage: {
+        provider: 'istanbul'
+     }
+   },
    preview: {
       host: '0.0.0.0',
       port: 8002

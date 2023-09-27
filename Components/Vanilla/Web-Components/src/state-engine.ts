@@ -15,7 +15,7 @@ export class StateEngine<STATETYPE extends {}> {
     _state: STATETYPE = {} as STATETYPE;
     _lastDispatchedState: STATETYPE = {} as STATETYPE;
 
-    _tickSubject = new Subject<void>();
+    private _tickSubject = new Subject<void>();
     _dispatchUpdateSubject = new Subject<StateChanges<STATETYPE>>();
 
     constructor(initialState: STATETYPE) {
