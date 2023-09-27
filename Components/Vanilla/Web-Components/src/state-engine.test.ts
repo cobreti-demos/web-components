@@ -1,5 +1,5 @@
 import {describe, expect, test, vi, beforeEach, afterEach} from 'vitest';
-import {StateEngine} from "./state-engine.ts";
+import {StateChanges, StateEngine} from "./state-engine.ts";
 import {Subject} from "rxjs";
 
 interface TestState {
@@ -68,5 +68,72 @@ describe('state-engine', async () => {
 
         expect(spyOnTick).toBeCalled();
         expect(spyOnTick).toBeCalledTimes(1);
+    });
+
+    test('updating state trigger stateChangeObservable', async () => {
+        const stateEngine = new StateEngine<TestState>({});
+
+        let stateChangeData : StateChanges<TestState> | null = null;
+
+        const onStateChange = vi.fn()
+            .mockImplementation( (changes: StateChanges<TestState>) => {
+                stateChangeData = changes;
+            });
+
+        stateEngine.stateChangeObservable
+            .subscribe(onStateChange);
+
+        stateEngine.update({
+            value1: 5
+        });
+
+        vi.advanceTimersByTime(2000);
+
+
+        expect(onStateChange).toBeCalled();
+        expect(stateChangeData).not.toBeNull();
+
+        if (stateChangeData) {
+            const {state, oldState} = stateChangeData;
+
+            expect(oldState).not.toBeNull();
+            expect(oldState).toEqual({});
+            expect(state).not.toBeNull();
+            expect(state).toEqual({value1: 5});
+        }
+    });
+
+    test('update is merging states', async () => {
+
+        const stateEngine = new StateEngine<TestState>({ value1: 5});
+
+        let stateChangeData: StateChanges<TestState> | null = null;
+
+        const onStateChange = vi.fn()
+            .mockImplementation((changes) => {
+                stateChangeData = changes;
+            });
+
+        stateEngine.stateChangeObservable
+            .subscribe(onStateChange);
+
+        stateEngine.update({ value2: 10});
+
+        vi.advanceTimersByTime(2000);
+
+        expect(stateChangeData).not.toBeNull();
+
+        if (stateChangeData) {
+            const {state, changes, oldState} = stateChangeData;
+
+            expect(oldState).toEqual({value1: 5});
+
+            expect(state).toEqual({
+                value1: 5,
+                value2: 10
+            });
+
+            expect(changes).toEqual({value2: 10});
+        }
     });
 });

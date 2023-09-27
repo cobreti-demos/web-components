@@ -20,6 +20,7 @@ export class StateEngine<STATETYPE extends {}> {
 
     constructor(initialState: STATETYPE) {
         this._state = initialState;
+        this._lastDispatchedState = {...initialState};
 
         this._tickSubject
             .pipe(debounceTime(this._updateDebounceTime))
