@@ -1,0 +1,43 @@
+<mxfile host="Electron" modified="2023-09-28T18:20:41.805Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.0.0 Chrome/114.0.5735.289 Electron/25.8.3 Safari/537.36" etag="Zm0km_TWXrjI4dy0cE9-" version="22.0.0" type="device">
+  <diagram name="Page-1" id="bBljTizIdDO3cTQnCgV5">
+    <mxGraphModel dx="1892" dy="600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Y2hPEl4LE0DF9DcDQNEa-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;endArrow=block;endFill=1;" edge="1" parent="1" source="Y2hPEl4LE0DF9DcDQNEa-12" target="Y2hPEl4LE0DF9DcDQNEa-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Y2hPEl4LE0DF9DcDQNEa-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=diamond;startFill=1;endArrow=none;endFill=0;" edge="1" parent="1" source="Y2hPEl4LE0DF9DcDQNEa-12" target="Y2hPEl4LE0DF9DcDQNEa-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Y2hPEl4LE0DF9DcDQNEa-12" value="AddressFormComponent" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-10" y="590" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Y2hPEl4LE0DF9DcDQNEa-13" value="HTMLElement" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-10" y="440" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Y2hPEl4LE0DF9DcDQNEa-15" value="AddressForm" style="rounded=1;whiteSpace=wrap;html=1;perimeterSpacing=0;" vertex="1" parent="1">
+          <mxGeometry x="350" y="590" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Y2hPEl4LE0DF9DcDQNEa-17" value="Unit Tests&amp;nbsp;&lt;br&gt;Performed on this object" style="shape=note;strokeWidth=2;fontSize=14;size=20;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#666600;perimeterSpacing=10;" vertex="1" parent="1">
+          <mxGeometry x="430" y="760" width="110.00000000000001" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Y2hPEl4LE0DF9DcDQNEa-19" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;exitX=0;exitY=0;exitDx=45.00000000000001;exitDy=0;exitPerimeter=0;targetPerimeterSpacing=0;sourcePerimeterSpacing=0;" edge="1" parent="1" source="Y2hPEl4LE0DF9DcDQNEa-17">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="720" as="sourcePoint" />
+            <mxPoint x="465" y="670" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Y2hPEl4LE0DF9DcDQNEa-20" value="Simple shell object to build the web component using the AddressForm object" style="shape=note;strokeWidth=2;fontSize=14;size=20;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontColor=#666600;perimeterSpacing=10;" vertex="1" parent="1">
+          <mxGeometry x="-30" y="740" width="260" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Y2hPEl4LE0DF9DcDQNEa-21" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="Y2hPEl4LE0DF9DcDQNEa-20">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-50" y="730" as="sourcePoint" />
+            <mxPoint x="100" y="670" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
