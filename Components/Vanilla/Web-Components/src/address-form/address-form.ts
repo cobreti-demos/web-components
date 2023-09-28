@@ -17,9 +17,10 @@ export class AddressForm {
     }
 
     get state() : AddressFormState { return this._stateEngine.state; }
-    get debounceTime(): number { return this._debounceTime; }
 
     get dispatchEventObservable() : Observable<Event> { return this._dispatchEvent$; }
+
+    get debounceTime() : number { return this._debounceTime; }
 
     connectedCallback(parent: ParentNode) {
         const templateNode = document.createElement('template');
@@ -77,18 +78,21 @@ export class AddressForm {
     }
 
     private onPostalCodeChanged(elm: HTMLInputElement, ev: Event) {
+        ev.preventDefault();
         this.updateState({
             postalCode: elm.value
         });
     }
 
     private onAddressChanged(elm: HTMLInputElement, ev: Event) {
+        ev.preventDefault();
         this.updateState({
             address: elm.value
         });
     }
 
     private onCityChanged(elm: HTMLInputElement, ev: Event) {
+        ev.preventDefault();
         this.updateState({
             city: elm.value
         });
