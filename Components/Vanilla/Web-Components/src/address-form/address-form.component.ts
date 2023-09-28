@@ -3,6 +3,12 @@ import {Subject, takeUntil} from "rxjs";
 
 export default class AddressFormComponent extends HTMLElement {
 
+    static readonly componentName = 'test-address-form';
+
+    static registerComponent() {
+        customElements.define(AddressFormComponent.componentName, AddressFormComponent);
+    }
+
     private _shadowRoot: ShadowRoot | null = null;
     private _addressForm = new AddressForm();
     private _disconnected$ = new Subject<void>();
