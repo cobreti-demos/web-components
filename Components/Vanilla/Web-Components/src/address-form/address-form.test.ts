@@ -1,7 +1,7 @@
 import {afterEach, beforeEach, describe, test, vi, expect} from 'vitest';
 import { JSDOM } from 'jsdom';
 import {AddressForm} from "./address-form.ts";
-import {fromEvent} from "rxjs";
+import * as RxJxModule from 'rxjs';
 
 describe('address-form', async () => {
 
@@ -37,6 +37,25 @@ describe('address-form', async () => {
             expect(formElm).not.toBeNull();
             expect(styleElm).not.toBeNull();
         }
+    });
+
+    test('connected callback register event listeners', async () => {
+        const mockedDOM = new JSDOM(`<div class="root"></div>`);
+        const form = new AddressForm();
+
+        const spyFromEvent = vi.spyOn(RxJxModule, 'fromEvent');
+
+        global.document = mockedDOM.window.document;
+        const rootElm = document.querySelector('.root');
+
+        expect(rootElm).not.toBeNull();
+
+        if (rootElm) {
+            form.connectedCallback(rootElm);
+
+            expect(spyFromEvent).toBeCalledTimes(3);
+        }
+
     });
 
     test('postal code change event', async () => {
@@ -173,5 +192,26 @@ describe('address-form', async () => {
         form.disconnectedCallback();
 
         expect(disconnectedCalled).toBeTruthy();
+    });
+
+    test('event handlers not added if DOM elements not present', async () => {
+
+        const mockedDOM = new JSDOM(`<div class="root"></div>`);
+        const form = new AddressForm();
+
+        const spySetupDOM = vi.spyOn(form, 'setupDOM')
+            .mockImplementation((parent: ParentNode) => {});
+        const spyFromEvent = vi.spyOn(RxJxModule, 'fromEvent');
+
+        global.document = mockedDOM.window.document;
+        const rootElm = document.querySelector('.root');
+
+        expect(rootElm).not.toBeNull();
+
+        if (rootElm) {
+            form.connectedCallback(rootElm);
+
+            expect(spyFromEvent).not.toBeCalled();
+        }
     });
 })

@@ -27,6 +27,15 @@ export class AddressForm {
     get disconnected() : Observable<void> { return this._disconnected$; }
 
     connectedCallback(parent: ParentNode) {
+
+        this.setupDOM(parent);
+        this.setupEventsHandlers(parent);
+    }
+    disconnectedCallback() {
+        this._disconnected$.next();
+    }
+
+    setupDOM(parent: ParentNode) {
         const templateNode = document.createElement('template');
         templateNode.innerHTML = template;
 
@@ -35,7 +44,9 @@ export class AddressForm {
 
         parent.appendChild(styleNode);
         parent.appendChild(templateNode.content.cloneNode(true));
+    }
 
+    setupEventsHandlers(parent: ParentNode) {
         const postalCodeElm = parent.querySelector('#postal-code') as HTMLInputElement;
         if (postalCodeElm) {
             fromEvent(postalCodeElm, 'input')
@@ -74,10 +85,6 @@ export class AddressForm {
                     }
                 }));
             });
-    }
-
-    disconnectedCallback() {
-        this._disconnected$.next();
     }
 
     updateState(newState: AddressFormState) {
