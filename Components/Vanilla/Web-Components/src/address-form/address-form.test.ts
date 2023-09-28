@@ -131,4 +131,47 @@ describe('address-form', async () => {
             expect(form.state).toEqual({city: 'new city'});
         }
     });
+
+    test('state change lead to dispatch custom event', async () => {
+        const mockedDOM = new JSDOM(`<div class="root"></div>`);
+
+        const form = new AddressForm();
+
+        global.document = mockedDOM.window.document;
+        const rootElm = document.querySelector('.root');
+
+        expect(rootElm).not.toBeNull();
+
+        if (rootElm) {
+            let dispatchedEvent: Event | null = null;
+
+            form.dispatchEventObservable
+                .subscribe((event) => {
+                    dispatchedEvent = event;
+                });
+
+            form.connectedCallback(rootElm);
+
+            form.updateState({
+                city: 'test'
+            });
+
+            vi.advanceTimersByTime(form.stateEngine.updateDebounceTime);
+
+            expect(dispatchedEvent).not.toBeNull();
+        }
+    });
+
+    test('disconnectedCallback trigger disconnected event', async () => {
+
+        const form = new AddressForm();
+
+        let disconnectedCalled = false;
+
+        form.disconnected.subscribe(() => { disconnectedCalled = true;})
+
+        form.disconnectedCallback();
+
+        expect(disconnectedCalled).toBeTruthy();
+    });
 })

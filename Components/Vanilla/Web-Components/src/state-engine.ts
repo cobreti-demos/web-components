@@ -29,6 +29,8 @@ export class StateEngine<STATETYPE extends {}> {
             });
     }
 
+    get updateDebounceTime() : number { return this._updateDebounceTime; }
+
     get stateChangeObservable(): Observable<StateChanges<STATETYPE>> {
         return this._dispatchUpdateSubject;
     }

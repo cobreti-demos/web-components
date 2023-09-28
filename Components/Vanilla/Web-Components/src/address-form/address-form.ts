@@ -18,9 +18,13 @@ export class AddressForm {
 
     get state() : AddressFormState { return this._stateEngine.state; }
 
+    get stateEngine(): StateEngine<AddressFormState> { return this._stateEngine; }
+
     get dispatchEventObservable() : Observable<Event> { return this._dispatchEvent$; }
 
     get debounceTime() : number { return this._debounceTime; }
+
+    get disconnected() : Observable<void> { return this._disconnected$; }
 
     connectedCallback(parent: ParentNode) {
         const templateNode = document.createElement('template');
@@ -73,8 +77,11 @@ export class AddressForm {
     }
 
     disconnectedCallback() {
-        console.log('disconnected');
         this._disconnected$.next();
+    }
+
+    updateState(newState: AddressFormState) {
+        this._stateEngine.update(newState);
     }
 
     private onPostalCodeChanged(elm: HTMLInputElement, ev: Event) {
@@ -97,9 +104,4 @@ export class AddressForm {
             city: elm.value
         });
     }
-
-    private updateState(newState: AddressFormState) {
-        this._stateEngine.update(newState);
-    }
-
 }
