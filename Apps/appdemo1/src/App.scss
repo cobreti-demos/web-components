@@ -1,0 +1,50 @@
+:root {
+  --header-height: 10em;
+  --footer-height: 10em;
+  --grid-margin: 1em;
+}
+
+.container {
+  display: grid;
+  grid-template-rows: [header] var(--header-height)
+                      [content] calc(100vh - var(header-height) - var(--foother-height))
+                      [footer] var(--footer-height);
+  grid-template-columns: 100%;
+  overflow: hidden;
+
+  .header {
+    display: block;
+    position: relative;
+    border: 1px dotted black;
+    box-sizing: border-box;
+    margin: var(--grid-margin);
+    width: calc(100vw - 2*var(--grid-margin));
+    min-height: calc(var(--header-height) - 2*var(--grid-margin));
+  }
+
+  .content {
+    display: block;
+    position: relative;
+    margin: var(--grid-margin);
+    width: calc(100vw - 2*var(--grid-margin));
+    min-height: calc(100vh - var(--header-height) - var(--footer-height) - 2*var(--grid-margin));
+    border: 1px dotted black;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .footer {
+    display: block;
+    position: relative;
+    margin: var(--grid-margin);
+    width: calc(100vw - 2*var(--grid-margin));
+    min-height: calc( var(--footer-height) - 2*var(--grid-margin));
+    border: 1px dotted black;
+    box-sizing: border-box;
+  }
+}
+
+.form {
+  display: block;
+  width: 50vw;
+}
