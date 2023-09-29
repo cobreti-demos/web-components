@@ -1,6 +1,12 @@
 import './App.scss'
 
-
+declare global {
+    namespace JSX {
+        interface IntrinsicElements {
+            "test-address-form": React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
+        }
+    }
+}
 
 function App() {
 
