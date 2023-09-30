@@ -2,15 +2,9 @@ import './style.css'
 import typescriptLogo from './typescript.svg'
 import viteLogo from '/vite.svg'
 import { setupCounter } from './counter.ts'
+import {WebComponentLoader} from "./web-component-loader.ts";
 
-console.log('before import');
-
-// if (!('process' in window)) {
-//     debugger;
-//     window.process = {};
-// }
-
-import 'http://localhost:8003/index.es.js';
+new WebComponentLoader('web-components.json').loadWebComponents();
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
