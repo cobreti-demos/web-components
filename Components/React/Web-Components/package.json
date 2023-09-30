@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@r2wc/react-to-web-component": "^2.0.2",
+    "@types/node": "^20.8.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "vite-plugin-sass-dts": "^1.3.11"

@@ -1,5 +1,5 @@
 
-export const Header = () : JSX.Element => {
+export function Header () {
     return (
         <div>
             header
