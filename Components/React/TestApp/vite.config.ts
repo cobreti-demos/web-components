@@ -1,5 +1,6 @@
 import {defineConfig} from 'vitest/config'
 import sassDts from 'vite-plugin-sass-dts'
+import {resolve} from "path";
 
 export default defineConfig({
     test: {
@@ -13,5 +14,10 @@ export default defineConfig({
     },
     plugins: [
         sassDts()
-    ]
+    ],
+    resolve: {
+        alias: {
+            '@interfaces': resolve(__dirname, './src/interfaces'),
+        }
+    }
 });
