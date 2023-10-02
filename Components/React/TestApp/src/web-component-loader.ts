@@ -32,7 +32,6 @@ export class WebComponentLoader {
             const scriptElem = document.createElement('script');
             scriptElem.type = 'module';
             scriptElem.src = url;
-            scriptElem.async = true;
             document.head.append(scriptElem);
         }
         catch (error) {

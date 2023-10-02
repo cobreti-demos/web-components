@@ -2,6 +2,7 @@
   --header-height: 10em;
   --footer-height: 10em;
   --grid-margin: 1em;
+  overflow: hidden;
 }
 
 .container {
@@ -17,9 +18,10 @@
     position: relative;
     border: 1px dotted black;
     box-sizing: border-box;
+    background-color: cyan;
     margin: var(--grid-margin);
     width: calc(100vw - 2*var(--grid-margin));
-    min-height: calc(var(--header-height) - 2*var(--grid-margin));
+    height: calc(var(--header-height) - 2*var(--grid-margin));
   }
 
   .content {
@@ -27,7 +29,7 @@
     position: relative;
     margin: var(--grid-margin);
     width: calc(100vw - 2*var(--grid-margin));
-    min-height: calc(100vh - var(--header-height) - var(--footer-height) - 2*var(--grid-margin));
+    height: calc(100vh - var(--header-height) - var(--footer-height) - 2*var(--grid-margin));
     border: 1px dotted black;
     box-sizing: border-box;
     overflow: hidden;
@@ -38,7 +40,7 @@
     position: relative;
     margin: var(--grid-margin);
     width: calc(100vw - 2*var(--grid-margin));
-    min-height: calc( var(--footer-height) - 2*var(--grid-margin));
+    height: calc( var(--footer-height) - 2*var(--grid-margin));
     border: 1px dotted black;
     box-sizing: border-box;
   }

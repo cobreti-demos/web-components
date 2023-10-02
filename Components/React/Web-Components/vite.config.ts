@@ -14,8 +14,8 @@ export default defineConfig({
     port: 8003
   },
   plugins: [
-    react(),
-    sassDts()
+    sassDts(),
+    react()
   ],
   define: {
     'process.env': {}
@@ -28,6 +28,9 @@ export default defineConfig({
       entry: resolve(__dirname, 'src/index.tsx'),
       name: 'index',
       fileName: (format) => `index.${format}.js`
+    },
+    watch: {
+      buildDelay: 1000
     }
   },
   base: ''
