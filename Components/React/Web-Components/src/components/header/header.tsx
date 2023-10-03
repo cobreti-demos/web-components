@@ -6,7 +6,9 @@ export function Header () {
     return (
         <>
             <div className="header">
-                <div>header test</div>
+                <div>
+                    <slot name="logo"></slot>
+                </div>
                 <div></div>
                 <div><Login></Login></div>
             </div>
