@@ -1,0 +1,44 @@
+.login-control {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  div {
+    display: grid;
+    align-content: center;
+    box-sizing: border-box;
+    height: 100%;
+
+    div {
+      display: block;
+
+      label {
+        margin-left: 1em;
+        padding-top: 0.5em;
+        display: block;
+        width: 8em;
+      }
+
+      input {
+        margin: 0.5em 1em 0 1em;
+        display: block;
+        width: calc(100% - 2em);
+        box-sizing: border-box;
+      }
+
+      button {
+        margin-top: 1em;
+        margin-left: 1em;
+      }
+    }
+
+    div:first-child {
+      padding-top: 1em;
+    }
+
+    div:last-child {
+      padding-bottom: 1em;
+    }
+  }
+}

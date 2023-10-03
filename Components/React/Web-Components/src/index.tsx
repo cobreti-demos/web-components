@@ -1,1 +1,1 @@
-import './header/header.tsx';
+import './components/header/header.tsx';

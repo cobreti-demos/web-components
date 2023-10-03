@@ -23,7 +23,10 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "paths": {
+      "@components/*": ["components/*"]
+    }
   },
   "include": [
     "src"

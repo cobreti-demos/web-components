@@ -33,7 +33,13 @@ export default defineConfig({
       buildDelay: 1000
     }
   },
-  base: ''
+  base: '',
+  resolve: {
+    alias: {
+      '@components/': resolve(__dirname, './src/components'),
+    }
+  }
+
 });
 
 
