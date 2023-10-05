@@ -25,6 +25,13 @@ export class MainComponent {
 
             rootElm.appendChild(styleNode);
             rootElm.appendChild(templateNode.content.cloneNode(true));
+
+            const headerElm = rootElm.querySelector('#header');
+            if (headerElm) {
+                headerElm.addEventListener('on-login', (event) => {
+                    console.log('header element event : ', event);
+                });
+            }
         }
     }
 }

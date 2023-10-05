@@ -1,8 +1,30 @@
 import styles from './header.scss?inline';
 import {r2wc} from "@cobreti/r2wc";
-import {Login} from "@components/login/login.tsx";
+import {Inputs as LoginCredentials, Login} from "@components/login/login.tsx";
 
-export function Header () {
+export type { LoginCredentials }
+
+export interface HeaderProps {
+    container: HTMLElement
+    onLogin?: (credentials: LoginCredentials) => void
+}
+
+export function Header (props: HeaderProps) {
+
+    const onLogin = (creds: LoginCredentials) => {
+        if (props.container) {
+            const webEvent = new CustomEvent('on-login', {
+                bubbles: true,
+                composed: true,
+                detail: {
+                    credentials: creds
+                }
+            });
+
+            props.container.dispatchEvent(webEvent);
+        }
+    }
+
     return (
         <>
             <div className="header">
@@ -10,15 +32,14 @@ export function Header () {
                     <slot name="logo"></slot>
                 </div>
                 <div></div>
-                <div><Login></Login></div>
+                <div><Login onLogin={onLogin}></Login></div>
             </div>
         </>
     )
 }
 
-const WCHeader = r2wc(Header, {
+const WCHeader = r2wc<HeaderProps>(Header, {
     shadow: 'open',
-    props: {},
     styles: styles
 });
 
