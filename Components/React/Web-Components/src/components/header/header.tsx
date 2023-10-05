@@ -6,7 +6,6 @@ export type { LoginCredentials }
 
 export interface HeaderProps {
     container: HTMLElement
-    onLogin?: (credentials: LoginCredentials) => void
 }
 
 export function Header (props: HeaderProps) {
