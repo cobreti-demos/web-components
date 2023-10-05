@@ -15,6 +15,7 @@ declare global {
             toBeInTheDocument(): R
             toBeVisible(): R
             toBeDisabled(): R
+            toBeEnabled(): R
         }
     }
 }

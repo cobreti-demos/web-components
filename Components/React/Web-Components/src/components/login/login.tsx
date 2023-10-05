@@ -20,7 +20,6 @@ export function Login(props: LoginProps) {
         if (props.onLogin) {
             props.onLogin(data);
         }
-        console.log(data);
     }
 
     return (
