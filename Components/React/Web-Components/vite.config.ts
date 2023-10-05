@@ -10,7 +10,8 @@ export default defineConfig({
     coverage: {
       provider: 'istanbul'
     },
-    setupFiles: './setupTest.ts'
+    setupFiles: './setupTest.ts',
+    teardownTimeout: 30000
   },
   server: {
     port: 8003,

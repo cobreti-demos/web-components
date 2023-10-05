@@ -27,14 +27,14 @@ export function Login(props: LoginProps) {
         <div className="login-control">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
-                    <label>Username</label>
-                    <input {...register("username", {
+                    <label htmlFor="username">Username</label>
+                    <input id="username" {...register("username", {
                         required: true, minLength: 10
                     })} />
                 </div>
                 <div>
-                    <label>Password</label>
-                    <input type="password" {...register("password",
+                    <label htmlFor="password">Password</label>
+                    <input id="password" type="password" {...register("password",
                         {required: true, minLength: 10})} />
                 </div>
                 <div>
