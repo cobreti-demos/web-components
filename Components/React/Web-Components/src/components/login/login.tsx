@@ -1,19 +1,36 @@
+import {SubmitHandler, useForm} from "react-hook-form";
+
+type Inputs = {
+    username: string,
+    password: string
+}
+
 export function Login() {
+    const {
+        register,
+        handleSubmit,
+        formState: { isDirty, isValid }
+    } = useForm<Inputs>({mode: 'onChange'});
+
+    const onSubmit: SubmitHandler<Inputs> = (data) => {
+        console.log(data);
+    }
+
     return (
         <div className="login-control">
-            <div>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <label>Username</label>
-                    <input type="text" />
+                    <input {...register("username", {required: true, minLength: 10})} />
                 </div>
                 <div>
                     <label>Password</label>
-                    <input type="password" />
+                    <input type="password" {...register("password", {required: true, minLength: 10})} />
                 </div>
                 <div>
-                    <button>submit</button>
+                    <input type="submit" value="login" disabled={!isDirty || !isValid}></input>
                 </div>
-            </div>
+            </form>
         </div>
     )
 }
