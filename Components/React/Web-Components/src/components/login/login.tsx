@@ -13,7 +13,7 @@ export function Login(props: LoginProps) {
     const {
         register,
         handleSubmit,
-        formState: { errors, isDirty, isValid }
+        formState: { isDirty, isValid }
     } = useForm<Inputs>({mode: 'onChange'});
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {
@@ -40,9 +40,6 @@ export function Login(props: LoginProps) {
                 <div>
                     <input type="submit" value="login" disabled={!isDirty || !isValid}></input>
                 </div>
-                { errors.password &&
-                    <span>{errors.password.message}</span>
-                }
             </form>
         </div>
     )
