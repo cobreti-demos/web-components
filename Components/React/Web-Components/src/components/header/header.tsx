@@ -5,7 +5,7 @@ import {Inputs as LoginCredentials, Login} from "@components/login/login.tsx";
 export type { LoginCredentials }
 
 export interface HeaderProps {
-    container: HTMLElement
+    container?: HTMLElement
 }
 
 export function Header (props: HeaderProps) {
