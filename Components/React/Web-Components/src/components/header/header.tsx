@@ -15,6 +15,7 @@ export function Header (props: HeaderProps) {
             const webEvent = new CustomEvent('on-login', {
                 bubbles: true,
                 composed: true,
+                cancelable: true,
                 detail: {
                     credentials: creds
                 }
