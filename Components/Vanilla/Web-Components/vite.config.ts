@@ -25,7 +25,7 @@ export default defineConfig({
       minify: false,
       lib: {
          formats: ['es', 'umd'],
-         entry: resolve(__dirname, 'src/index.tsx'),
+         entry: resolve(__dirname, 'src/index.ts'),
          name: 'index',
          fileName: (format) => `index.${format}.js`
       }

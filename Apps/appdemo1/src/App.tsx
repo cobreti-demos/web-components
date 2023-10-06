@@ -1,18 +1,29 @@
 import './App.scss'
+import {WebComponentLoader} from "./web-component-loader.ts";
+import {useEffect} from "react";
 
 declare global {
     namespace JSX {
         interface IntrinsicElements {
             "test-address-form": React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
+            "test-header": React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
         }
     }
 }
 
+const webComponentLoader = new WebComponentLoader('web-components.json');
+
 function App() {
+
+    useEffect(() => {
+        webComponentLoader.loadWebComponents();
+    }, [webComponentLoader]);
 
     return (
         <div className="container">
-            <div className="header"></div>
+            <div className="header">
+                <test-header></test-header>
+            </div>
             <div className="content">
                 <div className="form">
                     <test-address-form></test-address-form>
