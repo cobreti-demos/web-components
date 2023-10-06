@@ -11,7 +11,6 @@ export default defineConfig({
       provider: 'istanbul'
     },
     setupFiles: './setupTest.ts',
-    teardownTimeout: 30000
   },
   server: {
     port: 8003,

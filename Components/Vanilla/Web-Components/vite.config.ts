@@ -4,9 +4,10 @@ import { resolve } from 'path';
 
 export default defineConfig({
    test: {
-     coverage: {
-        provider: 'istanbul'
-     }
+      environment: 'jsdom',
+      coverage: {
+         provider: 'istanbul'
+      }
    },
    preview: {
       host: '0.0.0.0',
