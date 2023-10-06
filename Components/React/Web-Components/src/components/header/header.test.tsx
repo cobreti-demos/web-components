@@ -1,15 +1,28 @@
-import {describe, expect, test, vi} from 'vitest';
+import {afterEach, beforeEach, describe, expect, test, vi} from 'vitest';
 import {render} from "@testing-library/react";
 import {Header} from "@components/header/header.tsx";
 import {userEvent} from "@testing-library/user-event";
+import { JSDOM } from 'jsdom';
 
 describe('header', async () => {
 
-    test('callback called', async () => {
-        const headerContainer = document.createElement('div');
-        expect(headerContainer).not.toBeNull();
+    beforeEach(() => {
+    })
 
-        document.body.appendChild(headerContainer);
+    afterEach(()=> {
+        vi.clearAllMocks();
+        vi.resetAllMocks();
+        vi.resetModules();
+        vi.restoreAllMocks();
+    })
+
+    test('callback called', async () => {
+        const mockedDOM = new JSDOM(`<div id='header-container'></div>`);
+
+        global.document = mockedDOM.window.document;
+
+        const headerContainer = document.querySelector('#header-container') as HTMLElement;
+        expect(headerContainer).not.toBeNull();
 
         if (headerContainer) {
             const {container} = render(<Header container={headerContainer}></Header>, {
@@ -19,7 +32,9 @@ describe('header', async () => {
 
             const dispatchEventSpy = vi.spyOn(headerContainer, 'dispatchEvent');
 
-            const user = userEvent.setup();
+            const user = userEvent.setup({
+                document: mockedDOM.window.document
+            });
 
             const usernameInput = document.querySelector('input[id=username]') as HTMLInputElement;
             // const usernameInput = await screen.findByLabelText('username');
