@@ -1,5 +1,5 @@
 :root {
-  --header-height: 10em;
+  --header-height: 15em;
   --footer-height: 10em;
   --grid-margin: 1em;
   overflow: hidden;
@@ -18,10 +18,10 @@
     position: relative;
     border: 1px dotted black;
     box-sizing: border-box;
-    background-color: cyan;
     margin: var(--grid-margin);
     width: calc(100vw - 2*var(--grid-margin));
     height: calc(var(--header-height) - 2*var(--grid-margin));
+    overflow: hidden;
   }
 
   .content {
