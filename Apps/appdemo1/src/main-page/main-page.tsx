@@ -1,5 +1,6 @@
 import './main-page.scss'
 import Header from "../header/header.tsx";
+import AddressForm from "../address-form/address-form.tsx";
 
 export default function MainPage() {
 
@@ -10,7 +11,7 @@ export default function MainPage() {
             </div>
             <div className="content">
                 <div className="form">
-                    <test-address-form></test-address-form>
+                    <AddressForm></AddressForm>
                 </div>
             </div>
             <div className="footer"></div>

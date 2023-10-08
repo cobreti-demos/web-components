@@ -78,6 +78,8 @@ export class AddressForm {
             .pipe(takeUntil(this._disconnected$))
             .subscribe((data) => {
                 this._dispatchEvent$.next(new CustomEvent('state-changed', {
+                    bubbles: true,
+                    composed: true,
                     detail: {
                         oldState: data.oldState,
                         changes: data.changes,
