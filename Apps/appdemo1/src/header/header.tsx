@@ -1,29 +1,27 @@
 import './header.scss';
-import {useEffect, useRef} from "react";
+import ComponentEventHandlers, {
+    TComponentEventHandlersArray
+} from "../component-event-handlers/component-event-handlers.tsx";
 
 export default function Header() {
-    const testHeaderRef = useRef<HTMLElement | null>(null);
-
     const onLoginEvHandler = (ev: Event) => {
         ev.preventDefault();
         ev.stopPropagation();
         console.log('on-login event', ev);
     }
 
-    useEffect(() => {
-        const htmlElm = testHeaderRef.current;
-        console.log('useEffect - register event handler', testHeaderRef);
-        htmlElm?.addEventListener('on-login', onLoginEvHandler);
-
-        return () => {
-            console.log('useEffect cleanup event handler');
-            htmlElm?.removeEventListener('on-login', onLoginEvHandler);
+    const EventHandlersMapping : TComponentEventHandlersArray = [
+        {
+            event: 'on-login',
+            handler: onLoginEvHandler
         }
-    }, [testHeaderRef]);
+    ];
 
     return (
         <>
-            <test-header ref={testHeaderRef}></test-header>
+            <ComponentEventHandlers handlers={EventHandlersMapping}>
+                <test-header></test-header>
+            </ComponentEventHandlers>
         </>
     )
 }
