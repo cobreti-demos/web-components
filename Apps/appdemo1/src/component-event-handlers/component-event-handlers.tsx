@@ -19,14 +19,11 @@ export default function ComponentEventHandlers(props : ComponentEventHandlersPro
 
     useEffect(() => {
         const htmlElm = childrenRef.current;
-        console.log('useEffect - register event handler', childrenRef);
-
         props.handlers?.forEach(item => {
             htmlElm?.addEventListener(item.event, item.handler);
         })
 
         return () => {
-            console.log('useEffect cleanup event handler');
             props.handlers?.forEach(item => {
                 htmlElm?.removeEventListener(item.event, item.handler);
             })
