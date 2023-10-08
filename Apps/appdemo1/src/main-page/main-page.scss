@@ -1,0 +1,47 @@
+
+.container {
+  display: grid;
+  grid-template-rows: [header] var(--header-height)
+                      [content] calc(100vh - var(header-height) - var(--foother-height))
+                      [footer] var(--footer-height);
+  grid-template-columns: 100%;
+  overflow: hidden;
+
+  .header {
+    display: block;
+    position: relative;
+    border: 1px dotted black;
+    box-sizing: border-box;
+    margin: var(--grid-margin);
+    width: calc(100vw - 2*var(--grid-margin));
+    height: calc(var(--header-height) - 2*var(--grid-margin));
+    overflow: hidden;
+  }
+
+  .content {
+    display: block;
+    position: relative;
+    margin: var(--grid-margin);
+    width: calc(100vw - 2*var(--grid-margin));
+    height: calc(100vh - var(--header-height) - var(--footer-height) - 2*var(--grid-margin));
+    border: 1px dotted black;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .footer {
+    display: block;
+    position: relative;
+    margin: var(--grid-margin);
+    width: calc(100vw - 2*var(--grid-margin));
+    height: calc( var(--footer-height) - 2*var(--grid-margin));
+    border: 1px dotted black;
+    box-sizing: border-box;
+  }
+}
+
+.form {
+  margin: 1em;
+  display: block;
+  width: 50vw;
+}

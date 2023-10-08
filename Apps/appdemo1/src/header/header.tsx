@@ -1,3 +1,4 @@
+import './header.scss';
 import {useEffect, useRef} from "react";
 
 export default function Header() {

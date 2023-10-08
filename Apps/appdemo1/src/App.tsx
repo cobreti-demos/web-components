@@ -1,7 +1,7 @@
 import './App.scss'
 import {WebComponentLoader} from "./web-component-loader.ts";
 import {useEffect} from "react";
-import Header from "./header/header.tsx";
+import MainPage from "./main-page/main-page.tsx";
 
 declare global {
     namespace JSX {
@@ -20,19 +20,10 @@ function App() {
         webComponentLoader.loadWebComponents();
     }, [webComponentLoader]);
 
+
     return (
-        <div className="container">
-            <div className="header">
-                <Header></Header>
-            </div>
-            <div className="content">
-                <div className="form">
-                    <test-address-form></test-address-form>
-                </div>
-            </div>
-            <div className="footer"></div>
-        </div>
-  )
+        <MainPage></MainPage>
+    )
 }
 
 export default App
