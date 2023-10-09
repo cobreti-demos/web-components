@@ -22,7 +22,10 @@
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
 
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "paths": {
+      "@datatypes/*": ["datatypes/*"]
+    }
   },
   "include": ["src"]
 }

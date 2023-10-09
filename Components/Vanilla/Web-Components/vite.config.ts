@@ -30,5 +30,10 @@ export default defineConfig({
          fileName: (format) => `index.${format}.js`
       }
    },
-   base: ''
+   base: '',
+   resolve: {
+      alias: {
+         '@datatypes': resolve(__dirname, './src/datatypes'),
+      }
+   }
 });

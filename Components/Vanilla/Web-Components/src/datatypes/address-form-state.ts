@@ -3,5 +3,3 @@ export interface AddressFormState {
     city?: string,
     postalCode?: string
 }
-
-export type AddressFormStateKeys = Array<keyof AddressFormState>;
