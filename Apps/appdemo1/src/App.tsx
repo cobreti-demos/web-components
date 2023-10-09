@@ -1,7 +1,7 @@
 import './App.scss'
 import {WebComponentLoader} from "./web-component-loader.ts";
 import {useEffect} from "react";
-import MainPage from "./main-page/main-page.tsx";
+import MainPage from "@components/main-page/main-page.tsx";
 
 declare global {
     namespace JSX {

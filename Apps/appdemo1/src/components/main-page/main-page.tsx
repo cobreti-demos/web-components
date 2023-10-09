@@ -1,6 +1,6 @@
 import './main-page.scss'
-import Header from "../header/header.tsx";
-import AddressForm from "../address-form/address-form.tsx";
+import Header from "@components/header/header.tsx";
+import AddressForm from "@components/address-form/address-form.tsx";
 
 export default function MainPage() {
 

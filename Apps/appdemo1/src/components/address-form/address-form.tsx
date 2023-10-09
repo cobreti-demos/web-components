@@ -1,8 +1,8 @@
 import ComponentEventHandlers, {
     TComponentEventHandlersArray
-} from "../component-event-handlers/component-event-handlers.tsx";
+} from "@components/component-event-handlers/component-event-handlers.tsx";
 import {useDispatch} from "react-redux";
-import {updateAddress} from "@store/addressSlice.ts";
+import {updateAddress} from "@store/slices/addressSlice.ts";
 
 export default function AddressForm() {
 
@@ -13,12 +13,12 @@ export default function AddressForm() {
         event.preventDefault();
         console.log('address form state change : ', event);
 
-        const cs = event as CustomEvent;
+        const ce = event as CustomEvent;
 
         dispatch(updateAddress({
-            address: cs.detail.state.address,
-            city: cs.detail.state.city,
-            postalCode: cs.detail.state.postalCode
+            address: ce.detail.state.address,
+            city: ce.detail.state.city,
+            postalCode: ce.detail.state.postalCode
         }));
     }
 
