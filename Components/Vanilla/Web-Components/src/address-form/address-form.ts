@@ -2,8 +2,8 @@ import {Subject, debounceTime, fromEvent, takeUntil, Observable} from 'rxjs';
 import template from './address-form.html?raw';
 import styles from './address-form.scss?inline';
 import { StateEngine } from '../state-engine';
-import {AddressFormState} from "@datatypes/address-form-state.ts";
-import {addressStateChangedEventType, AddressStateChangedEvent} from "@datatypes/address-state-changed-event.ts";
+import {AddressFormState} from "../api/datatypes/address-form-state.ts";
+import {createAddressFormStateEvent} from "@api/events/address-form-state-event.ts";
 
 
 export class AddressForm {
@@ -78,15 +78,7 @@ export class AddressForm {
         this._stateEngine.stateChangeObservable
             .pipe(takeUntil(this._disconnected$))
             .subscribe((data) => {
-                this._dispatchEvent$.next(new AddressStateChangedEvent(addressStateChangedEventType, {
-                    bubbles: true,
-                    composed: true,
-                    detail: {
-                        oldState: data.oldState,
-                        changes: data.changes,
-                        state: data.state
-                    }
-                }));
+                this._dispatchEvent$.next(createAddressFormStateEvent(data));
             });
     }
 

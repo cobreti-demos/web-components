@@ -24,7 +24,7 @@
 
     "baseUrl": "./src",
     "paths": {
-      "@datatypes/*": ["datatypes/*"]
+      "@api/*": ["api/*"]
     }
   },
   "include": ["src"]

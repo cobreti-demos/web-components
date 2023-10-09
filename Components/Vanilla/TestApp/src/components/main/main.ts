@@ -4,6 +4,7 @@ import '@interfaces/window';
 
 import { IApplication } from '@interfaces/application';
 import { first } from 'rxjs';
+import {listenOnAddressFormStateEvent} from "@wcapi/events/address-form-state-event.ts";
 
 
 export class MainComponent {
@@ -32,9 +33,9 @@ export class MainComponent {
             const testAddressForm = rootElm.querySelectorAll('.form');
 
             testAddressForm.forEach( (formElm) => {
-                formElm.addEventListener('state-changed', (ev) => {
+                listenOnAddressFormStateEvent(formElm, (ev) => {
                     console.log(ev);
-                });
+                })
             })
          }
     }
