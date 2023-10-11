@@ -18,5 +18,6 @@ export default defineConfig({
             '@store': resolve(__dirname, './src/store'),
             '@components': resolve(__dirname, './src/components')
         }
-    }
+    },
+    base: '/appdemo1'
 })
