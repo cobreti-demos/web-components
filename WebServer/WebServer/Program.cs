@@ -8,6 +8,13 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.WithOrigins("*");
+    });
+});
 
 var app = builder.Build();
 
@@ -21,6 +28,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseCors();
 
 app.MapControllers();
 
@@ -40,6 +48,15 @@ app.UseStaticFiles(new StaticFileOptions
             Path.Combine(Directory.GetCurrentDirectory(),
             "../../Components/React/Web-Components/dist")),
     RequestPath = "/react"
+});
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider =
+        new PhysicalFileProvider(
+            Path.Combine(Directory.GetCurrentDirectory(),
+                "../../Apps/appdemo1/dist")),
+    RequestPath = "/appdemo1"
 });
 
 app.Run();
