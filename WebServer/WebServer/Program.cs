@@ -32,16 +32,17 @@ app.UseCors();
 
 app.MapControllers();
 
-app.UseStaticFiles(new StaticFileOptions
+
+app.UseFileServer(new FileServerOptions
 {
     FileProvider =
         new PhysicalFileProvider(
             Path.Combine(Directory.GetCurrentDirectory(),
-            "../../Components/Vanilla/Web-Components/dist")),
-    RequestPath = "/vanilla"
+                "../../Components/Vanilla/Web-Components/dist")),
+    RequestPath = "/vanilla",
 });
 
-app.UseStaticFiles(new StaticFileOptions
+app.UseFileServer(new FileServerOptions
 {
     FileProvider =
         new PhysicalFileProvider(
@@ -50,7 +51,7 @@ app.UseStaticFiles(new StaticFileOptions
     RequestPath = "/react"
 });
 
-app.UseStaticFiles(new StaticFileOptions
+app.UseFileServer(new FileServerOptions
 {
     FileProvider =
         new PhysicalFileProvider(
@@ -58,5 +59,6 @@ app.UseStaticFiles(new StaticFileOptions
                 "../../Apps/appdemo1/dist")),
     RequestPath = "/appdemo1"
 });
+
 
 app.Run();
