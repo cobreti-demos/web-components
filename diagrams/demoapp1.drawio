@@ -1,0 +1,33 @@
+<mxfile host="Electron" modified="2023-10-12T22:26:35.777Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.0.2 Chrome/114.0.5735.289 Electron/25.8.4 Safari/537.36" etag="b7wIf41wTa4QqnSKjB1W" version="22.0.2" type="device">
+  <diagram name="modules" id="HgfbZAADzNHX2S-0uaO_">
+    <mxGraphModel dx="2292" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="-gQ7ek7E1gyIlCPC_REx-1" value="DemoApp1" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-80" y="-120" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="-gQ7ek7E1gyIlCPC_REx-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.985;exitY=0.231;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="-gQ7ek7E1gyIlCPC_REx-2" target="-gQ7ek7E1gyIlCPC_REx-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-gQ7ek7E1gyIlCPC_REx-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="-gQ7ek7E1gyIlCPC_REx-2" target="-gQ7ek7E1gyIlCPC_REx-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-gQ7ek7E1gyIlCPC_REx-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.99;exitY=0.788;exitDx=0;exitDy=0;exitPerimeter=0;dashed=1;" edge="1" parent="1" source="-gQ7ek7E1gyIlCPC_REx-2" target="-gQ7ek7E1gyIlCPC_REx-4">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-160" y="90" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-gQ7ek7E1gyIlCPC_REx-2" value="" style="sketch=0;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#434445;aspect=fixed;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.vvd.web_browser;" vertex="1" parent="1">
+          <mxGeometry x="-420" y="-40" width="225.35" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="-gQ7ek7E1gyIlCPC_REx-3" value="Login&lt;br&gt;&lt;br&gt;(React Web-Component)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="10" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="-gQ7ek7E1gyIlCPC_REx-4" value="Address form&lt;br&gt;&lt;br&gt;(Vanilla Web-Component)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="120" width="160" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
