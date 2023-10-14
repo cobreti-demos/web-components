@@ -9,7 +9,7 @@ export default defineConfig({
         }
     },
     server: {
-        port: 8102,
+        port: 8103,
         host: "0.0.0.0"
     },
     plugins: [
@@ -18,6 +18,7 @@ export default defineConfig({
     resolve: {
         alias: {
             '@interfaces': resolve(__dirname, './src/interfaces'),
+            '@wcapi': resolve(__dirname, '../Web-Components/dist/api')
         }
     }
 });
