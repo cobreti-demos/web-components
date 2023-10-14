@@ -12,7 +12,7 @@ declare global {
     }
 }
 
-const webComponentLoader = new WebComponentLoader('web-components.json');
+const webComponentLoader = new WebComponentLoader('web-components.{mode}.json');
 
 function App() {
 
@@ -22,7 +22,9 @@ function App() {
 
 
     return (
-        <MainPage></MainPage>
+        <>
+            <MainPage></MainPage>
+        </>
     )
 }
 

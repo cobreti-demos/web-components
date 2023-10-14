@@ -1,8 +1,10 @@
 [
   {
+    "name": "Vanilla Web Component",
     "url": "http://localhost:8100/vanilla/index.es.js"
   },
   {
+    "name": "React Web Component",
     "url": "http://localhost:8100/react/index.es.js"
   }
 ]
