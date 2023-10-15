@@ -56,6 +56,15 @@ app.UseFileServer(new FileServerOptions
     FileProvider =
         new PhysicalFileProvider(
             Path.Combine(Directory.GetCurrentDirectory(),
+                "../../Components/Angular/Web-Component/dist/web-component")),
+    RequestPath = "/angular"
+});
+
+app.UseFileServer(new FileServerOptions
+{
+    FileProvider =
+        new PhysicalFileProvider(
+            Path.Combine(Directory.GetCurrentDirectory(),
                 "../../Apps/appdemo1/dist")),
     RequestPath = "/appdemo1"
 });
