@@ -11,7 +11,6 @@ import {Application} from "./application.ts";
 
     const logPanel = document.getElementById('log-panel');
     console.log(logPanel);
-    debugger;
 
     // setTimeout(() => {
     // }, 2000);
