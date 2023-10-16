@@ -1,6 +1,6 @@
 import 'zone.js';
-// import '@webcomponents/custom-elements/src/native-shim';
-// import '@webcomponents/custom-elements/custom-elements.min';
+import '@webcomponents/custom-elements/src/native-shim';
+import '@webcomponents/custom-elements/custom-elements.min';
 
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 

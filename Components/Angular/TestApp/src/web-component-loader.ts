@@ -24,33 +24,44 @@ export class WebComponentLoader {
             const text  = await response.text();
             const content = JSON.parse(text) as [WebComponentsEntry];
 
+            const promises:Promise<void>[] = [];
+
             content.forEach(entry => {
-                this.addWebComponent(entry);
+                promises.push(this.addWebComponent(entry));
             });
+
+            await Promise.all(promises);
         }
         catch (error) {
             console.error(error);
         }
     }
 
-    addWebComponent(entry: WebComponentsEntry) {
-        try {
-            const existingElm = document.getElementById(entry.name);
+    addWebComponent(entry: WebComponentsEntry): Promise<void> {
+        return new Promise<void>( (resolve, reject) => {
+            try {
+                const existingElm = document.getElementById(entry.name);
 
-            if (!existingElm) {
-                console.log(`loading web-component '${entry.name}' --> ${entry.url}`);
-                const scriptElem = document.createElement('script');
-                scriptElem.type = 'module';
-                scriptElem.id = entry.name;
-                scriptElem.src = entry.url;
-                document.head.append(scriptElem);
+                if (!existingElm) {
+                    console.log(`loading web-component '${entry.name}' --> ${entry.url}`);
+                    const scriptElem = document.createElement('script');
+                    scriptElem.type = 'module';
+                    scriptElem.id = entry.name;
+                    scriptElem.src = entry.url;
+                    scriptElem.async = true;
+                    scriptElem.onload = () => {
+                        console.log('script parsed');
+                        resolve();
+                    }
+                    document.head.append(scriptElem);
+                } else {
+                    resolve();
+                    console.log(`web-component '${entry.name}' already loaded`);
+                }
+            } catch (error) {
+                console.error(error);
+                reject();
             }
-            else {
-                console.log(`web-component '${entry.name}' already loaded`);
-            }
-        }
-        catch (error) {
-            console.error(error);
-        }
+        });
     }
 }

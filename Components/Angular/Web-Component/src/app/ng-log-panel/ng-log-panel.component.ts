@@ -1,4 +1,13 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import {Component, ElementRef, Input, SimpleChange, SimpleChanges, ViewEncapsulation} from '@angular/core';
+
+
+class LogPanelProxy {
+
+  setMessage(msg: string) {
+    console.log(msg);
+  }
+}
+
 
 @Component({
   selector: 'app-ng-log-panel',
@@ -8,4 +17,20 @@ import { Component, ViewEncapsulation } from '@angular/core';
 })
 export class NgLogPanelComponent {
 
+  private _proxy = new LogPanelProxy();
+
+  constructor(private elRef: ElementRef) {
+    elRef.nativeElement['proxy'] = this._proxy;
+  }
+
+  get proxy() { return this._proxy;}
+
+  @Input() value!: string;
+
+  ngOnInit() {
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('ngOnChanges called', changes);
+  }
 }
