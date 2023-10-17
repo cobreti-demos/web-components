@@ -4,8 +4,17 @@ import {Inputs as LoginCredentials, Login} from "@components/login/login.tsx";
 
 export type { LoginCredentials }
 
+
+class HeaderProxy {
+    setHeaderMessage(msg: string) {
+        console.log(msg);
+    }
+}
+
+
 export interface HeaderProps {
     container?: HTMLElement
+    proxy?: HeaderProxy
 }
 
 export function Header (props: HeaderProps) {
@@ -38,9 +47,12 @@ export function Header (props: HeaderProps) {
     )
 }
 
-const WCHeader = r2wc<HeaderProps>(Header, {
+const proxy = new HeaderProxy();
+
+const WCHeader = r2wc<HeaderProps, HeaderProxy>(Header,{
     shadow: 'open',
-    styles: styles
+    styles: styles,
+    webComponentApi: proxy
 });
 
 customElements.define('test-header', WCHeader);

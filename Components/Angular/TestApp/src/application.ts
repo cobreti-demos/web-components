@@ -2,9 +2,8 @@
 import { IApplication } from "@interfaces/application";
 import '@interfaces/window';
 import { BehaviorSubject, Observable } from "rxjs";
-import {WebComponentLoader} from "./web-component-loader.ts";
 import {MainComponent} from "./components/main/main.ts";
-// import { MainComponent } from "./components/main/main";
+import {WebComponentLoader} from '@cobreti/cobreti-web-component';
 
 
 
@@ -16,8 +15,7 @@ export interface WebComponentsEntry {
 
 export class Application implements IApplication {
 
-    private _webComponentLoader = new WebComponentLoader('/web-components.{mode}.json');
-    // private readonly  _webComponentsJsonUrl = '/web-components.{mode}.json';
+    private _webComponentLoader = new WebComponentLoader();
     private _initSubject = new BehaviorSubject<IApplication|null>(null);
     private _mainComponent: MainComponent | undefined;
 
@@ -28,8 +26,9 @@ export class Application implements IApplication {
 
     async init() {
 
-        await this._webComponentLoader.loadWebComponents();
-        // await this.loadWebComponents();
+        const webComponentsDirectoryUrl = `/web-components.${import.meta.env.MODE}.json`;
+
+        await this._webComponentLoader.loadWebComponentsWithDirectoryUrl(webComponentsDirectoryUrl);
 
         this._mainComponent = new MainComponent(this);
 

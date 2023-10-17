@@ -1,7 +1,7 @@
 import { IApplication } from '@interfaces/application.ts';
-import {WebComponentLoader} from "./web-component-loader.ts";
 import {BehaviorSubject, Observable} from 'rxjs';
 import {MainComponent} from "./components/main/main.ts";
+import {WebComponentLoader} from "@cobreti/web-component";
 
 export class Application implements IApplication {
 
@@ -13,7 +13,9 @@ export class Application implements IApplication {
 
     async init() {
 
-        await new WebComponentLoader('web-components.json').loadWebComponents();
+        const webComponentsDirectoryUrl = `/web-components.${import.meta.env.MODE}.json`;
+
+        await new WebComponentLoader().loadWebComponentsWithDirectoryUrl(webComponentsDirectoryUrl);
 
         this._mainComponent = new MainComponent(this);
 

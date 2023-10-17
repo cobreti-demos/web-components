@@ -1,5 +1,6 @@
 [
     {
+        "name": "vanilla web component",
         "url": "http://localhost:8002/index.es.js"
     }
 ]
