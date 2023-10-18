@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@types/node": "^20.6.2",
+    "@vanilla-web-component/api": "file:api/vanilla-web-component-api-0.0.1.tgz",
     "path": "^0.12.7",
     "rxjs": "^7.8.1"
   }

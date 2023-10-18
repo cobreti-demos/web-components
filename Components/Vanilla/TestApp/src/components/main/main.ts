@@ -4,7 +4,7 @@ import '@interfaces/window';
 
 import { IApplication } from '@interfaces/application';
 import { first } from 'rxjs';
-import {listenOnAddressFormStateEvent} from "@wcapi/events/address-form-state-event.ts";
+import {listenOnAddressFormStateEvent} from "@vanilla-web-component/api";
 
 
 export class MainComponent {

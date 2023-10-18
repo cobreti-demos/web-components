@@ -21,8 +21,7 @@
 
     "baseUrl": "./src",
     "paths": {
-      "@interfaces/*": ["interfaces/*"],
-      "@wcapi/*": ["../../Web-Components/dist/api/*"]
+      "@interfaces/*": ["interfaces/*"]
     }
   },
   "include": ["src"]

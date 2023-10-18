@@ -17,8 +17,7 @@ export default defineConfig({
     ],
     resolve: {
         alias: {
-            '@interfaces': resolve(__dirname, './src/interfaces'),
-            '@wcapi': resolve(__dirname, '../Web-Components/dist/api')
+            '@interfaces': resolve(__dirname, './src/interfaces')
         }
     }
 });

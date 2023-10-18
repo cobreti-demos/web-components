@@ -37,12 +37,14 @@ export default defineConfig({
             entry: resolve(__dirname, 'src/index.ts'),
             name: 'index',
             fileName: (format) => `index.${format}.js`,
+        },
+        watch: {
+            buildDelay: 1000
         }
     },
     base: '',
     resolve: {
         alias: {
-            '@api': resolve(__dirname, './src/api')
         }
     }
 });

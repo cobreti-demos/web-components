@@ -1,15 +1,34 @@
 {
-  "name": "api",
+  "name": "@vanilla-web-component/api",
   "private": true,
-  "version": "0.0.0.1",
+  "version": "0.0.1",
   "type": "module",
+  "keywords": [
+    "Vanilla Web Component",
+    "Api"
+  ],
+  "main": "./dist/index.cjs.js",
+  "module": "./dist/index.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs.js",
+      "import": "./dist/index.es.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "pack": "npm run build && npm pack --pack-destination ../Web-Components/dist/api"
+    "pack": "npm run build && npm pack --pack-destination ../Web-Components/api"
   },
   "devDependencies": {
     "@types/node": "^20.8.7",
