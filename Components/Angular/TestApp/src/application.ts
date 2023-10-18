@@ -3,7 +3,7 @@ import { IApplication } from "@interfaces/application";
 import '@interfaces/window';
 import { BehaviorSubject, Observable } from "rxjs";
 import {MainComponent} from "./components/main/main.ts";
-import {WebComponentLoader} from '@cobreti/cobreti-web-component';
+import {WebComponentLoader} from '@cobreti/web-component';
 
 
 
@@ -15,7 +15,7 @@ export interface WebComponentsEntry {
 
 export class Application implements IApplication {
 
-    private _webComponentLoader = new WebComponentLoader();
+    private _webComponentLoader : WebComponentLoader = new WebComponentLoader();
     private _initSubject = new BehaviorSubject<IApplication|null>(null);
     private _mainComponent: MainComponent | undefined;
 
