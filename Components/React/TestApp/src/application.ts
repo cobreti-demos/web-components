@@ -7,6 +7,7 @@ export class Application implements IApplication {
 
     private _initSubject$ = new BehaviorSubject<IApplication | null>(null);
     private _mainComponent: MainComponent | null = null;
+    private _webComponentLoader : WebComponentLoader = new WebComponentLoader();
 
     constructor() {
     }
@@ -15,7 +16,7 @@ export class Application implements IApplication {
 
         const webComponentsDirectoryUrl = `/web-components.${import.meta.env.MODE}.json`;
 
-        await new WebComponentLoader().loadWebComponentsWithDirectoryUrl(webComponentsDirectoryUrl);
+        await this._webComponentLoader.loadWebComponentsWithDirectoryUrl(webComponentsDirectoryUrl);
 
         this._mainComponent = new MainComponent(this);
 
