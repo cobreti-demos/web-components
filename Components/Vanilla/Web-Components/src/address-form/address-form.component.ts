@@ -1,7 +1,7 @@
 import {AddressForm} from "./address-form.ts";
 import {Subject, takeUntil} from "rxjs";
-import {HTMLElementWithApi} from "../HTMLElementWithApi.ts";
 import {AddressFormApi} from "@vanilla-web-component/api";
+import {HTMLElementWithApi} from "@cobreti/web-component";
 
 
 
