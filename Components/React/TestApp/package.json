@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@cobreti/web-component": "^0.0.2",
+    "@react-web-component/api": "file:../Web-Components/api/react-web-component-api-0.0.1.tgz",
     "path": "^0.12.7",
     "rxjs": "^7.8.1"
   }

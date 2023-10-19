@@ -1,25 +1,24 @@
 import styles from './header.scss?inline';
 import {r2wc} from "@cobreti/r2wc";
-import {Inputs as LoginCredentials, Login} from "@components/login/login.tsx";
+import {LoginData} from "@react-web-component/api";
+import {Login} from "@components/login/login.tsx";
+import {HeaderApi} from "@react-web-component/api";
 
-export type { LoginCredentials }
 
-
-class HeaderProxy {
-    setHeaderMessage(msg: string) {
-        console.log(msg);
-    }
-}
 
 
 export interface HeaderProps {
     container?: HTMLElement
-    proxy?: HeaderProxy
+    webComponentApi?: HeaderApi
 }
 
 export function Header (props: HeaderProps) {
 
-    const onLogin = (creds: LoginCredentials) => {
+    const onLogin = (creds: LoginData) => {
+        if (props.webComponentApi){
+            props.webComponentApi.loginSubject.next(creds);
+        }
+
         if (props.container) {
             const webEvent = new CustomEvent('on-login', {
                 bubbles: true,
@@ -47,12 +46,10 @@ export function Header (props: HeaderProps) {
     )
 }
 
-const proxy = new HeaderProxy();
-
-const WCHeader = r2wc<HeaderProps, HeaderProxy>(Header,{
+const WCHeader = r2wc<HeaderProps, HeaderApi>(Header,{
     shadow: 'open',
     styles: styles,
-    webComponentApi: proxy
+    webComponentApiFactory: () => { return new HeaderApi() }
 });
 
 customElements.define('test-header', WCHeader);

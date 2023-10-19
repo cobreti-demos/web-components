@@ -1,12 +1,8 @@
 import {SubmitHandler, useForm} from "react-hook-form";
-
-export type Inputs = {
-    username: string,
-    password: string
-}
+import {LoginData} from "@react-web-component/api";
 
 interface LoginProps {
-    onLogin?: (credentials: Inputs) => void
+    onLogin?: (credentials: LoginData) => void
 }
 
 export function Login(props: LoginProps) {
@@ -14,9 +10,9 @@ export function Login(props: LoginProps) {
         register,
         handleSubmit,
         formState: { isDirty, isValid }
-    } = useForm<Inputs>({mode: 'onChange'});
+    } = useForm<LoginData>({mode: 'onChange'});
 
-    const onSubmit: SubmitHandler<Inputs> = (data) => {
+    const onSubmit: SubmitHandler<LoginData> = (data) => {
         if (props.onLogin) {
             props.onLogin(data);
         }

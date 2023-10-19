@@ -2,7 +2,7 @@ import template from './main.html?raw';
 import styles from './main.scss?inline';
 import {IApplication} from "@interfaces/application.ts";
 import {first} from "rxjs";
-
+import {HeaderElement} from '@react-web-component/api';
 
 export class MainComponent {
 
@@ -26,8 +26,14 @@ export class MainComponent {
             rootElm.appendChild(styleNode);
             rootElm.appendChild(templateNode.content.cloneNode(true));
 
-            const headerElm = rootElm.querySelector('#header') as HTMLElement;
+            const headerElm = rootElm.querySelector('#header') as HeaderElement;
             if (headerElm) {
+                headerElm.webComponentApi
+                    .loginObserver
+                    .subscribe((creds) => {
+                        console.log('observer api login creds : ', creds);
+                    })
+
                 headerElm.addEventListener('on-login', (event) => {
                     console.log('header element event : ', event);
                 });

@@ -1,9 +1,10 @@
 {
-  "name": "@vanilla-web-component/api",
+  "name": "@react-web-component/api",
   "private": true,
   "version": "0.0.1",
   "type": "module",
   "keywords": [
+    "React",
     "Web Component",
     "Api"
   ],
@@ -35,8 +36,8 @@
     "@vitest/coverage-istanbul": "^0.34.6",
     "typescript": "^5.0.2",
     "vite": "^4.4.5",
-    "vite-plugin-dts": "^3.6.0",
-    "vitest": "^0.34.6"
+    "vitest": "^0.34.6",
+    "vite-plugin-dts": "^3.6.0"
   },
   "dependencies": {
     "rxjs": "^7.8.1"
