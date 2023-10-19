@@ -1,6 +1,7 @@
 import {describe, expect, test, vi, beforeEach, afterEach} from 'vitest';
-import {StateChanges, StateEngine} from "./state-engine.ts";
+import {StateEngine} from "./state-engine.ts";
 import {Subject} from "rxjs";
+import {StateChanges} from "@vanilla-web-component/api";
 
 interface TestState {
     value1?: number,

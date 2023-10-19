@@ -1,11 +1,6 @@
 import { Observable, Subject, debounceTime } from "rxjs";
 import { stateDiff } from "./state-diff";
-
-export interface StateChanges<STATETYPE> {
-    oldState: STATETYPE,
-    state: STATETYPE,
-    changes: STATETYPE
-}
+import {StateChanges} from "@vanilla-web-component/api";
 
 
 export class StateEngine<STATETYPE extends {}> {

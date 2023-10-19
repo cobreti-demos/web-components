@@ -4,7 +4,7 @@ import '@interfaces/window';
 
 import { IApplication } from '@interfaces/application';
 import { first } from 'rxjs';
-import {listenOnAddressFormStateEvent} from "@vanilla-web-component/api";
+import {AddressFormElement, listenOnAddressFormStateEvent} from "@vanilla-web-component/api";
 
 
 export class MainComponent {
@@ -30,12 +30,18 @@ export class MainComponent {
             rootElm.appendChild(styleNode);
             rootElm.appendChild(templateNode.content.cloneNode(true));
 
-            const testAddressForm = rootElm.querySelectorAll('.form');
+            const testAddressForm = rootElm.querySelector('.form') as AddressFormElement;
 
-            testAddressForm.forEach( (formElm) => {
-                listenOnAddressFormStateEvent(formElm, (ev) => {
-                    console.log(ev);
-                })
+            if (testAddressForm) {
+                testAddressForm.webComponentApi
+                    .addressFormStateChanged
+                    .subscribe(x => {
+                        console.log('using webComponentApi : ', x);
+                    });
+            }
+
+            listenOnAddressFormStateEvent(testAddressForm, (ev) => {
+                console.log('using addEventListener : ', ev);
             })
          }
     }
