@@ -9,8 +9,8 @@ import {Application} from "./application.ts";
 
     await app.init();
 
-    const logPanel = document.getElementById('log-panel');
-    console.log(logPanel);
+    // const logPanel = document.getElementById('log-panel');
+    // console.log(logPanel);
 
     // setTimeout(() => {
     // }, 2000);

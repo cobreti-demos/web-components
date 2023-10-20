@@ -1,12 +1,6 @@
 import {Component, ElementRef, Input, SimpleChange, SimpleChanges, ViewEncapsulation} from '@angular/core';
+import {LogPanelApi} from "@ng-web-component/api";
 
-
-class LogPanelProxy {
-
-  setMessage(msg: string) {
-    console.log(msg);
-  }
-}
 
 
 @Component({
@@ -17,13 +11,13 @@ class LogPanelProxy {
 })
 export class NgLogPanelComponent {
 
-  private _proxy = new LogPanelProxy();
+  private _api = new LogPanelApi();
 
   constructor(private elRef: ElementRef) {
-    elRef.nativeElement['proxy'] = this._proxy;
+    elRef.nativeElement['webComponentApi'] = this._api;
   }
 
-  get proxy() { return this._proxy;}
+  get webComponentApi() { return this._api;}
 
   @Input() value!: string;
 

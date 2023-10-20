@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@cobreti/web-component": "^0.0.2",
+    "@ng-web-component/api": "file:../Web-Components/api/ng-web-component-api-0.0.1.tgz",
     "rxjs": "^7.8.1"
   }
 }

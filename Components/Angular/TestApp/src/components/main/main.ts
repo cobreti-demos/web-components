@@ -4,6 +4,7 @@ import '@interfaces/window';
 
 import { IApplication } from '@interfaces/application';
 import { first } from 'rxjs';
+import {LogPanelElement} from "@ng-web-component/api";
 
 
 export class MainComponent {
@@ -29,7 +30,10 @@ export class MainComponent {
             rootElm.appendChild(styleNode);
             rootElm.appendChild(templateNode.content.cloneNode(true));
 
-            // const logPanelElm = document.getElementById('log-panel');
+            const logPanelElm = document.getElementById('log-panel') as LogPanelElement;
+            if (logPanelElm) {
+                console.log(logPanelElm.webComponentApi);
+            }
             // const proxy = logPanelElm.proxy;
             // debugger;
          }
