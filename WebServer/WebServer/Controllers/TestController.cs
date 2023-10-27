@@ -20,18 +20,7 @@ namespace WebServer.Controllers
         {
             _logger = logger;
         }
-
-        // public IActionResult Index()
-        // {
-        //     return View();
-        // }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View("Error!");
-        }
-
+        
 
         [HttpGet("file/{**url}")]
         public IActionResult Index(string url)
@@ -59,24 +48,5 @@ namespace WebServer.Controllers
             var fileContent = System.IO.File.OpenRead(filePath);
             return File(fileContent, "text/javascript");
         }
-
-        // [HttpGet("url/{**url}")]
-        // public async Task<IActionResult> FromUrl(string url)
-        // {
-        //     var baseUrl = "http://localhost:8003/";
-
-        //     Regex angularRegex = new Regex(@"^angular/(.*)");
-        //     var match = angularRegex.Match(url);
-        //     if (match.Success)
-        //     {
-        //         baseUrl = Path.Combine(baseUrl, match.Groups[1].Value);
-        //     }
-
-        //     // var client = new HttpClient();
-        //     // using HttpResponseMessage responseMessage = await client.GetAsync(baseUrl);
-
-        //     // return Ok(responseMessage);
-        //     return RedirectPreserveMethod(baseUrl);
-        // }
     }
 }

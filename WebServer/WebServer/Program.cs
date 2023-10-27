@@ -1,4 +1,6 @@
 using Microsoft.Extensions.FileProviders;
+using WebServer.ReverseProxy;
+using Yarp.ReverseProxy.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,8 +10,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddReverseProxy()
-    .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
+builder.Services
+    .AddSingleton<IProxyConfigProvider>(new CustomProxyConfigProvider())
+    .AddReverseProxy();
+
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
