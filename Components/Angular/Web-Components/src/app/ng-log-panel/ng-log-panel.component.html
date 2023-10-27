@@ -1,4 +1,9 @@
 <div class="panel">
-  <p>ng-log-panel works!</p>
-  <p>{{value}}</p>
+  <div class="log-container">
+    <div class="log-content">
+      <li *ngFor="let item of logs">
+        {{item}}
+      </li>
+    </div>
+  </div>
 </div>

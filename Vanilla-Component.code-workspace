@@ -1,0 +1,32 @@
+{
+    "folders": [
+        {
+            "name": "API",
+            "path": "Components/Vanilla/api"
+        },
+        {
+            "name": "TestApp",
+            "path": "Components/Vanilla/TestApp"
+        },
+        {
+            "name": "Web-Components",
+            "path": "Components/Vanilla/Web-Components"
+        },
+        {
+            "name": "Diagrams",
+            "path": "diagrams"
+        },
+    ],
+    "settings": {
+        "files.exclude": {
+            "Components": true,
+            "Apps": true,
+            "**/.git": true,
+            "**/.svn": true,
+            "**/.hg": true,
+            "**/CVS": true,
+            "**/.DS_Store": true,
+            "**/Thumbs.db": true
+        }
+    }
+}

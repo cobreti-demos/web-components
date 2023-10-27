@@ -2,8 +2,9 @@ import './header.scss';
 import ComponentEventHandlers, {
     TComponentEventHandlersArray
 } from "@components/component-event-handlers/component-event-handlers.tsx";
-import {useDispatch} from "react-redux";
+
 import {updateLogin} from "@store/slices/loginSlice.ts";
+import {useDispatch} from 'react-redux';
 
 export default function Header() {
 

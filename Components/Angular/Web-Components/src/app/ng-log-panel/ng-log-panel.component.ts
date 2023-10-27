@@ -13,8 +13,15 @@ export class NgLogPanelComponent {
 
   private _api = new LogPanelApi();
 
+  logs: string[] = [];
+
   constructor(private elRef: ElementRef) {
     elRef.nativeElement['webComponentApi'] = this._api;
+
+    for (let idx = 0; idx < 20; ++ idx) {
+      this.logs.push(`log line ${idx}`);
+    }
+
   }
 
   get webComponentApi() { return this._api;}

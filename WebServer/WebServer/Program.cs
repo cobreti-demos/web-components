@@ -8,6 +8,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddReverseProxy()
+    .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
@@ -17,6 +19,8 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+app.MapReverseProxy();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -56,7 +60,7 @@ app.UseFileServer(new FileServerOptions
     FileProvider =
         new PhysicalFileProvider(
             Path.Combine(Directory.GetCurrentDirectory(),
-                "../../Components/Angular/Web-Component/dist/web-component")),
+                "../../Components/Angular/Web-Components/dist/web-component")),
     RequestPath = "/angular"
 });
 
@@ -71,3 +75,4 @@ app.UseFileServer(new FileServerOptions
 
 
 app.Run();
+

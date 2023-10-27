@@ -1,0 +1,20 @@
+{
+    "folders": [
+        {
+            "name": "WebServer",
+            "path": "WebServer"
+        },
+    ],
+    "settings": {
+        "files.exclude": {
+            "Components": true,
+            "Apps": true,
+            "**/.git": true,
+            "**/.svn": true,
+            "**/.hg": true,
+            "**/CVS": true,
+            "**/.DS_Store": true,
+            "**/Thumbs.db": true
+        }
+    }
+}
