@@ -11,7 +11,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services
-    .AddSingleton<IProxyConfigProvider>(new CustomProxyConfigProvider())
+    .AddSingleton<IRoutesConfigProvider, RoutesConfigProvider>()
+    .AddSingleton<IClustersConfigProvider, ClustersConfigProvider>()
+    .AddSingleton<IProxyConfigProvider, CustomProxyConfigProvider>()
     .AddReverseProxy();
 
 builder.Services.AddCors(options =>
@@ -76,7 +78,6 @@ app.UseFileServer(new FileServerOptions
                 "../../Apps/appdemo1/dist")),
     RequestPath = "/appdemo1"
 });
-
 
 app.Run();
 

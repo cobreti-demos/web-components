@@ -7,7 +7,7 @@ public class CustomProxyConfigProvider : IProxyConfigProvider
 {
     private CustomMemoryConfig _config;
 
-    public CustomProxyConfigProvider()
+    public CustomProxyConfigProvider(IClustersConfigProvider clustersConfigProvider, IRoutesConfigProvider routesConfigProvider)
     {
         // Load a basic configuration
         // Should be based on your application needs.
