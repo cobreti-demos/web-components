@@ -46,4 +46,9 @@ public class RoutesConfigProvider : IRoutesConfigProvider
 
         return _routes[id];
     }
+
+    public IReadOnlyList<MutableRouteConfig> ListRoutes()
+    {
+        return _routes.Values.ToList();
+    }
 }

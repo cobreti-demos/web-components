@@ -31,6 +31,15 @@ public class ReverseProxyController : Controller
         return Ok(routesById);
     }
 
+    [HttpGet("Routes")]
+    public IActionResult ListRoutes()
+    {
+        var routes = _routesConfigProvider.ListRoutes();
+        var routesDto = routes.Select(x => _mapper.Map<RouteConfigDto>(x));
+
+        return Ok(routesDto);
+    }
+
     [HttpGet("Route/{id}")]
     public IActionResult GetRouteById(string id)
     {
