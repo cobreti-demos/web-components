@@ -11,5 +11,5 @@ public interface IRoutesConfigProvider
 
     IReadOnlyList<string> ListRouteIds();
 
-    MutableRouteConfig GetRouteById(string id);
+    MutableRouteConfig? GetRouteById(string id);
 }

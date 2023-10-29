@@ -37,11 +37,11 @@ public class RoutesConfigProvider : IRoutesConfigProvider
         return _routes.Keys.ToList();
     }
 
-    public MutableRouteConfig GetRouteById(string id)
+    public MutableRouteConfig? GetRouteById(string id)
     {
         if (!_routes.ContainsKey(id))
         {
-            throw new ArgumentException("invalid route id");
+            return null;
         }
 
         return _routes[id];
