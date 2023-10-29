@@ -1,12 +1,11 @@
-using System.Text.RegularExpressions;
-using WebServer.ReverseProxy.Config;
+using WebServer.ReverseProxy.Config.Route;
 using Yarp.ReverseProxy.Configuration;
 
 namespace WebServer.ReverseProxy;
 
 public class RoutesConfigProvider : IRoutesConfigProvider
 {
-    private Dictionary<string, MutableRouteConfig> _routes = new Dictionary<string, MutableRouteConfig>();
+    private readonly Dictionary<string, MutableRouteConfig> _routes = new Dictionary<string, MutableRouteConfig>();
 
     public RoutesConfigProvider()
     {

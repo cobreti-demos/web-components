@@ -1,4 +1,4 @@
-namespace WebServer.ReverseProxy.Config;
+namespace WebServer.ReverseProxy.Config.Route;
 
 public class MutableRouteTransforms
 {

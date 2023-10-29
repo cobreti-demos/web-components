@@ -14,14 +14,16 @@ public class CustomProxyConfigProvider : IProxyConfigProvider
         _clustersConfigProvider = clustersConfigProvider;
         _routesConfigProvider = routesConfigProvider;
         
-        _clustersConfigProvider.AddCluster("AngularWC", "http://localhost:8003/");
+        _clustersConfigProvider.CreateCluster("AngularWC").Set
+            .LoadBalancingPolicy(LoadBalancingPolicies.RoundRobin)
+            .AddDefaultDestination("http://localhost:8003");
 
         _routesConfigProvider.CreateRoute("AngularWC").Set
             .ClusterId("AngularWC")
             .Match_CatchAllPath("test/url/angular")
             .Transforms_PathRemovePrefix("/test/url/angular");
         
-        _config = new CustomMemoryConfig(_routesConfigProvider.ToRouteConfigList(), _clustersConfigProvider.Clusters);
+        _config = new CustomMemoryConfig(_routesConfigProvider.ToRouteConfigList(), _clustersConfigProvider.ToClusterConfigList());
     }
 
     public IProxyConfig GetConfig() => _config;

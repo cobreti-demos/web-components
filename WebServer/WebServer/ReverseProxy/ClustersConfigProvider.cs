@@ -1,35 +1,30 @@
+using WebServer.ReverseProxy.Config.Cluster;
 using Yarp.ReverseProxy.Configuration;
-using Yarp.ReverseProxy.LoadBalancing;
 
 namespace WebServer.ReverseProxy;
 
 public class ClustersConfigProvider : IClustersConfigProvider
 {
-    private Dictionary<string, ClusterConfig> _clusters = new Dictionary<string, ClusterConfig>();
+    private Dictionary<string, MutableClusterConfig> _clusters = new Dictionary<string, MutableClusterConfig>();
 
     public ClustersConfigProvider()
     {
     }
 
-    public IReadOnlyList<ClusterConfig> Clusters => _clusters.Values.ToList();
-
-    public void AddCluster(string id, string address)
+    public IReadOnlyList<ClusterConfig> ToClusterConfigList()
     {
-        if (_clusters.ContainsKey(id))
-        {
-            throw new ArgumentException($"Invalid cluser configuration : cluster with {id} already exists");
-        }
-        
-        var config = new ClusterConfig
-        {
-            ClusterId = id,
-            LoadBalancingPolicy = LoadBalancingPolicies.RoundRobin,
-            Destinations = new Dictionary<string, DestinationConfig>
-            {
-                { "default", new DestinationConfig { Address = address } },
-            }
-        };
+        return _clusters.Values.Select(x => x.ToClusterConfig()).ToList();
+    }
 
-        _clusters.Add(id, config);
+    public MutableClusterConfig CreateCluster(string id)
+    {
+         if (_clusters.ContainsKey(id))
+         {
+             throw new ArgumentException($"Invalid cluser configuration : cluster with {id} already exists");
+         }
+
+         var clusterConfig = new MutableClusterConfig(id);
+         _clusters.Add(id, clusterConfig);
+         return clusterConfig;
     }
 }
