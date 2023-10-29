@@ -1,11 +1,15 @@
+using System.Reflection;
+using AutoMapper;
 using Microsoft.Extensions.FileProviders;
+using WebServer.AutoMapping;
 using WebServer.ReverseProxy;
 using Yarp.ReverseProxy.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
+// Add services to the container.
+builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(RouteConfigProfile)));
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

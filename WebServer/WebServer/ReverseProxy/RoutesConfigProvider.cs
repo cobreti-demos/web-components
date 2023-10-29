@@ -31,5 +31,19 @@ public class RoutesConfigProvider : IRoutesConfigProvider
         
         return route;
     }
- 
+
+    public IReadOnlyList<string> ListRouteIds()
+    {
+        return _routes.Keys.ToList();
+    }
+
+    public MutableRouteConfig GetRouteById(string id)
+    {
+        if (!_routes.ContainsKey(id))
+        {
+            throw new ArgumentException("invalid route id");
+        }
+
+        return _routes[id];
+    }
 }
