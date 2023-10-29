@@ -17,5 +17,14 @@ public class RouteConfigProfile : Profile
 
         CreateMap<MutableClusterConfig, ClusterConfigDto>();
         CreateMap<MutableDestinationConfig, DestinationConfigDto>();
+
+        CreateMap<RouteConfigDto, MutableRouteConfig>()
+            .ForCtorParam("id", opt => opt.MapFrom(src => src.RouteId))
+            .ForMember(dest => dest.Transforms,
+                opt =>
+                {
+                    opt.MapFrom(src => new MutableRouteTransforms(src.Transforms));
+                });
+        CreateMap<RouteMatchDto, MutableRouteMatch>();
     }
 }

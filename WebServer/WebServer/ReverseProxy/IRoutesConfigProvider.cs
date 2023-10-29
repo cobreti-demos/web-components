@@ -8,7 +8,7 @@ public interface IRoutesConfigProvider
 {
     IReadOnlyList<RouteConfig> ToRouteConfigList();
     MutableRouteConfig CreateRoute(string id);
-
+    void AddRoute(MutableRouteConfig routeConfig);
     IReadOnlyList<string> ListRouteIds();
 
     MutableRouteConfig? GetRouteById(string id);

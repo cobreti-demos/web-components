@@ -32,6 +32,16 @@ public class RoutesConfigProvider : IRoutesConfigProvider
         return route;
     }
 
+    public void AddRoute(MutableRouteConfig routeConfig)
+    {
+        if (_routes.ContainsKey(routeConfig.RouteId))
+        {
+            throw new ArgumentException($"RouteConfig with id {routeConfig.RouteId} already exists");
+        }
+
+        _routes.Add(routeConfig.RouteId, routeConfig);
+    }
+
     public IReadOnlyList<string> ListRouteIds()
     {
         return _routes.Keys.ToList();

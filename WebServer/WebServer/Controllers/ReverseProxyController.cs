@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebServer.Models.ClusterConfig;
 using WebServer.Models.RouteConfig;
 using WebServer.ReverseProxy;
+using WebServer.ReverseProxy.Config.Route;
 
 namespace WebServer.Controllers;
 
@@ -47,6 +48,23 @@ public class ReverseProxyController : Controller
         var routeConfigDto = _mapper.Map<RouteConfigDto>(routeConfig);
 
         return Ok(routeConfigDto);
+    }
+
+    [HttpPost("Route")]
+    public IActionResult AddRoute([FromBody] RouteConfigDto routeConfigDto)
+    {
+        try
+        {
+            var mutableRouteConfig = _mapper.Map<MutableRouteConfig>(routeConfigDto);
+
+            _routesConfigProvider.AddRoute(mutableRouteConfig);
+            
+            return Ok(routeConfigDto);
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest("Route Id already exists");
+        }
     }
 
     [HttpGet("Clusters/Ids")]
