@@ -56,6 +56,15 @@ public class ReverseProxyController : Controller
         return Ok(clusterIds);
     }
 
+    [HttpGet("Clusters")]
+    public IActionResult ListClusters()
+    {
+        var clusters = _clustersConfigProvider.ListClusters();
+        var clustersDto = clusters.Select(x => _mapper.Map<ClusterConfigDto>(x));
+
+        return Ok(clustersDto);
+    }
+    
     [HttpGet("cluster/{id}")]
     public IActionResult GetClusterById(string id)
     {

@@ -42,5 +42,10 @@ public class ClustersConfigProvider : IClustersConfigProvider
 
         return _clusters[id];
     }
+
+    public IReadOnlyList<MutableClusterConfig> ListClusters()
+    {
+        return _clusters.Values.ToList();
+    }
 }
 

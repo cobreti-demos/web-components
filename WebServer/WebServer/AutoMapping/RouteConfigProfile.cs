@@ -16,5 +16,6 @@ public class RouteConfigProfile : Profile
         CreateMap<MutableRouteMatch, RouteMatchDto>();
 
         CreateMap<MutableClusterConfig, ClusterConfigDto>();
+        CreateMap<MutableDestinationConfig, DestinationConfigDto>();
     }
 }

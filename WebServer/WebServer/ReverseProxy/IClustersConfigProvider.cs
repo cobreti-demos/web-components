@@ -9,4 +9,5 @@ public interface IClustersConfigProvider
     MutableClusterConfig CreateCluster(string id);
     IReadOnlyList<string> ListClusterIds();
     MutableClusterConfig? GetClusterById(string id);
+    IReadOnlyList<MutableClusterConfig> ListClusters();
 }
