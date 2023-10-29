@@ -27,4 +27,20 @@ public class ClustersConfigProvider : IClustersConfigProvider
          _clusters.Add(id, clusterConfig);
          return clusterConfig;
     }
+
+    public IReadOnlyList<string> ListClusterIds()
+    {
+        return _clusters.Keys.ToList();
+    }
+
+    public MutableClusterConfig? GetClusterById(string id)
+    {
+        if (!_clusters.ContainsKey(id))
+        {
+            return null;
+        }
+
+        return _clusters[id];
+    }
 }
+
