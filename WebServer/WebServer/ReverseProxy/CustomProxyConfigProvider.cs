@@ -16,11 +16,11 @@ public class CustomProxyConfigProvider : IProxyConfigProvider
         
         _clustersConfigProvider.AddCluster("AngularWC", "http://localhost:8003/");
 
-        var route = _routesConfigProvider.CreateRoute("AngularWC");
-        route.SetClusterId("AngularWC");
-        route.Match.SetCatchAllPath("test/url/angular");
-        route.Transforms.AddPathRemovePrefix("/test/url/angular");
-
+        _routesConfigProvider.CreateRoute("AngularWC").Set
+            .ClusterId("AngularWC")
+            .Match_CatchAllPath("test/url/angular")
+            .Transforms_PathRemovePrefix("/test/url/angular");
+        
         _config = new CustomMemoryConfig(_routesConfigProvider.ToRouteConfigList(), _clustersConfigProvider.Clusters);
     }
 

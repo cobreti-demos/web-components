@@ -13,7 +13,7 @@ public class MutableRouteMatch
     
     public string Path => _path;
 
-    public MutableRouteMatch SetCatchAllPath(string path)
+    public void SetCatchAllPath(string path)
     {
         var matchallRegex = new Regex("^\\{(.*)\\}$");
         var parts = path.Split('/').ToList();
@@ -26,8 +26,6 @@ public class MutableRouteMatch
         }
 
         this._path = string.Join('/', parts);
-
-        return this;
     }
 
     public RouteMatch ToRouteMatch()
