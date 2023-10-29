@@ -14,7 +14,7 @@ public class RoutesConfigProvider : IRoutesConfigProvider
 
     public IReadOnlyList<RouteConfig> Routes => _routes.Values.ToList();
 
-    public void Add(RouteConfig config)
+    public IRoutesConfigProvider Add(RouteConfig config)
     {
         if (_routes.ContainsKey(config.RouteId))
         {
@@ -22,9 +22,11 @@ public class RoutesConfigProvider : IRoutesConfigProvider
         }
 
         _routes.Add(config.RouteId, config);
+
+        return this;
     }
 
-    public void AddCatchAll(string id, string match, string prefixToRemove)
+    public IRoutesConfigProvider AddCatchAll(string id, string clusterId, string match, string prefixToRemove)
     {
         if (_routes.ContainsKey(id))
         {
@@ -44,6 +46,7 @@ public class RoutesConfigProvider : IRoutesConfigProvider
         var routeConfig = new RouteConfig
         {
             RouteId = id,
+            ClusterId = clusterId,
             Match = new RouteMatch
             {
                 Path = string.Join('/', parts)
@@ -55,5 +58,7 @@ public class RoutesConfigProvider : IRoutesConfigProvider
         };
 
         _routes.Add(id, routeConfig);
+
+        return this;
     }
 }

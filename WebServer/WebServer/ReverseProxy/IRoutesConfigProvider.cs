@@ -5,6 +5,6 @@ namespace WebServer.ReverseProxy;
 public interface IRoutesConfigProvider
 {
     IReadOnlyList<RouteConfig> Routes { get; }
-    void Add(RouteConfig config);
-    void AddCatchAll(string id, string match, string prefixToRemove);
+    IRoutesConfigProvider Add(RouteConfig config);
+    IRoutesConfigProvider AddCatchAll(string id, string clusterId, string match, string prefixToRemove);
 }
