@@ -18,7 +18,7 @@ public class CustomProxyConfigProvider : IProxyConfigProvider
             .LoadBalancingPolicy(LoadBalancingPolicies.RoundRobin)
             .AddDefaultDestination("http://localhost:8003");
 
-        _routesConfigProvider.CreateRoute("AngularWC").Set
+        _routesConfigProvider.Create("AngularWC").Set
             .ClusterId("AngularWC")
             .Match_CatchAllPath("test/url/angular")
             .Transforms_PathRemovePrefix("/test/url/angular");

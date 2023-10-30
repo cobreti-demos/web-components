@@ -5,7 +5,6 @@ namespace WebServer.ReverseProxy.Config.Route;
 public class MutableRouteConfig
 {
     private string _id;
-    private MutableRouteMatch _match = new MutableRouteMatch();
     private FluentMutableRouteConfig _set;
 
     public MutableRouteConfig(string id)
@@ -20,7 +19,7 @@ public class MutableRouteConfig
 
     public string? ClusterId { get; set; }
 
-    public MutableRouteMatch Match => _match;
+    public MutableRouteMatch Match { get; set; } = new MutableRouteMatch();
 
     public MutableRouteTransforms Transforms { get; set; } = new MutableRouteTransforms();
     

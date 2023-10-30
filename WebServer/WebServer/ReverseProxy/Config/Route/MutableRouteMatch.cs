@@ -5,13 +5,11 @@ namespace WebServer.ReverseProxy.Config.Route;
 
 public class MutableRouteMatch
 {
-    private string _path = "";
-
     public MutableRouteMatch()
     {
     }
     
-    public string Path => _path;
+    public string Path { get; set; }
 
     public void SetCatchAllPath(string path)
     {
@@ -25,14 +23,14 @@ public class MutableRouteMatch
             parts.Add("{**catch-all}");
         }
 
-        this._path = string.Join('/', parts);
+        this.Path = string.Join('/', parts);
     }
 
     public RouteMatch ToRouteMatch()
     {
         return new RouteMatch
         {
-            Path = _path
+            Path = Path
         };
     }
 }

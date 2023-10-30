@@ -13,17 +13,17 @@ public class ReverseProxyController : Controller
     private IMapper _mapper;
     private IRoutesConfigProvider _routesConfigProvider;
     private IClustersConfigProvider _clustersConfigProvider;
-    
-    public ReverseProxyController( 
-        IMapper mapper, 
+
+    public ReverseProxyController(
+        IMapper mapper,
         IRoutesConfigProvider routesConfigProvider,
-        IClustersConfigProvider clustersConfigProvider )
+        IClustersConfigProvider clustersConfigProvider)
     {
         _mapper = mapper;
         _routesConfigProvider = routesConfigProvider;
         _clustersConfigProvider = clustersConfigProvider;
     }
-    
+
     [HttpGet("Routes/Ids")]
     public IActionResult ListRouteIds()
     {
@@ -57,16 +57,48 @@ public class ReverseProxyController : Controller
         {
             var mutableRouteConfig = _mapper.Map<MutableRouteConfig>(routeConfigDto);
 
-            _routesConfigProvider.AddRoute(mutableRouteConfig);
-            
+            _routesConfigProvider.Add(mutableRouteConfig);
+
             return Ok(routeConfigDto);
         }
         catch (ArgumentException ex)
         {
-            return BadRequest("Route Id already exists");
+            return BadRequest(ex.Message);
         }
     }
 
+    [HttpPut("Route")]
+    public IActionResult UpdateRoute([FromBody] RouteConfigDto routeConfigDto)
+    {
+        try
+        {
+            var mutableRouteConfig = _mapper.Map<MutableRouteConfig>(routeConfigDto);
+
+            _routesConfigProvider.Update(mutableRouteConfig);
+
+            return Ok(routeConfigDto);
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpDelete("Route/{id}")]
+    public IActionResult DeleteRoute(string id)
+    {
+        try
+        {
+            _routesConfigProvider.Remove(id);
+
+            return Ok();
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+    
     [HttpGet("Clusters/Ids")]
     public IActionResult ListClusterIds()
     {

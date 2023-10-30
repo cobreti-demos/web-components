@@ -19,7 +19,7 @@ public class RoutesConfigProvider : IRoutesConfigProvider
                 .ToList();
     }
 
-    public MutableRouteConfig CreateRoute(string id)
+    public MutableRouteConfig Create(string id)
     {
         if (_routes.ContainsKey(id))
         {
@@ -32,7 +32,7 @@ public class RoutesConfigProvider : IRoutesConfigProvider
         return route;
     }
 
-    public void AddRoute(MutableRouteConfig routeConfig)
+    public void Add(MutableRouteConfig routeConfig)
     {
         if (_routes.ContainsKey(routeConfig.RouteId))
         {
@@ -40,6 +40,26 @@ public class RoutesConfigProvider : IRoutesConfigProvider
         }
 
         _routes.Add(routeConfig.RouteId, routeConfig);
+    }
+
+    public void Update(MutableRouteConfig routeConfig)
+    {
+        if (!_routes.ContainsKey(routeConfig.RouteId))
+        {
+            throw new ArgumentException($"RouteConfig with id {routeConfig.RouteId} not found");
+        }
+
+        _routes[routeConfig.RouteId] = routeConfig;
+    }
+
+    public void Remove(string id)
+    {
+        if (!_routes.ContainsKey(id))
+        {
+            throw new ArgumentException($"RouteConfig with id {id} not found");
+        }
+
+        _routes.Remove(id);
     }
 
     public IReadOnlyList<string> ListRouteIds()
