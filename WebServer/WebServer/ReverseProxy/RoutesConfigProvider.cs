@@ -1,3 +1,5 @@
+using System.Reactive.Linq;
+using System.Reactive.Subjects;
 using WebServer.ReverseProxy.Config.Route;
 using Yarp.ReverseProxy.Configuration;
 
@@ -6,11 +8,19 @@ namespace WebServer.ReverseProxy;
 public class RoutesConfigProvider : IRoutesConfigProvider
 {
     private readonly Dictionary<string, MutableRouteConfig> _routes = new Dictionary<string, MutableRouteConfig>();
+    private readonly Subject<IRoutesConfigProvider> _updateSubject = new Subject<IRoutesConfigProvider>();
 
     public RoutesConfigProvider()
     {
         
     }
+
+    public void Update()
+    {
+        _updateSubject.OnNext(this);
+    }
+    
+    public IObservable<IRoutesConfigProvider> UpdateObservable => _updateSubject;
 
     public IReadOnlyList<RouteConfig> ToRouteConfigList()
     {

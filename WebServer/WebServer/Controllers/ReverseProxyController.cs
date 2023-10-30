@@ -17,7 +17,7 @@ public class ReverseProxyController : Controller
     public ReverseProxyController(
         IMapper mapper,
         IRoutesConfigProvider routesConfigProvider,
-        IClustersConfigProvider clustersConfigProvider)
+        IClustersConfigProvider clustersConfigProvider )
     {
         _mapper = mapper;
         _routesConfigProvider = routesConfigProvider;
@@ -121,5 +121,21 @@ public class ReverseProxyController : Controller
         var clusterConfig = _clustersConfigProvider.GetClusterById(id);
         var clusterConfigDto = _mapper.Map<ClusterConfigDto>(clusterConfig);
         return Ok(clusterConfigDto);
+    }
+
+    [HttpPost("routes/update")]
+    public IActionResult UpdateRoutes()
+    {
+        _routesConfigProvider.Update();
+        
+        return Ok();
+    }
+    
+    [HttpPost("clusters/update")]
+    public IActionResult UpdateClusters()
+    {
+        _clustersConfigProvider.Update();
+        
+        return Ok();
     }
 }

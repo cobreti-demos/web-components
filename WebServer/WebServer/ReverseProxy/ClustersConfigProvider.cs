@@ -1,3 +1,4 @@
+using System.Reactive.Subjects;
 using WebServer.ReverseProxy.Config.Cluster;
 using Yarp.ReverseProxy.Configuration;
 
@@ -6,9 +7,17 @@ namespace WebServer.ReverseProxy;
 public class ClustersConfigProvider : IClustersConfigProvider
 {
     private Dictionary<string, MutableClusterConfig> _clusters = new Dictionary<string, MutableClusterConfig>();
+    private readonly Subject<IClustersConfigProvider> _updateSubject = new Subject<IClustersConfigProvider>();
 
     public ClustersConfigProvider()
     {
+    }
+
+    public IObservable<IClustersConfigProvider> UpdateObservable => _updateSubject;
+    
+    public void Update()
+    {
+        _updateSubject.OnNext(this);
     }
 
     public IReadOnlyList<ClusterConfig> ToClusterConfigList()

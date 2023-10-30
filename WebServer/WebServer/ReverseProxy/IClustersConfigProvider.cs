@@ -5,6 +5,8 @@ namespace WebServer.ReverseProxy;
 
 public interface IClustersConfigProvider
 {
+    IObservable<IClustersConfigProvider> UpdateObservable { get; }
+    void Update();
     IReadOnlyList<ClusterConfig> ToClusterConfigList();
     MutableClusterConfig CreateCluster(string id);
     IReadOnlyList<string> ListClusterIds();

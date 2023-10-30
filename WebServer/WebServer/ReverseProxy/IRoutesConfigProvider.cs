@@ -6,6 +6,8 @@ namespace WebServer.ReverseProxy;
 
 public interface IRoutesConfigProvider
 {
+    IObservable<IRoutesConfigProvider> UpdateObservable { get; }
+    void Update();
     IReadOnlyList<RouteConfig> ToRouteConfigList();
     MutableRouteConfig Create(string id);
     void Add(MutableRouteConfig routeConfig);

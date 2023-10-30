@@ -13,6 +13,16 @@ public class CustomProxyConfigProvider : IProxyConfigProvider
     {
         _clustersConfigProvider = clustersConfigProvider;
         _routesConfigProvider = routesConfigProvider;
+
+        _routesConfigProvider.UpdateObservable.Subscribe((value) =>
+        {
+            Update();
+        });
+
+        _clustersConfigProvider.UpdateObservable.Subscribe(value =>
+        {
+            Update();
+        });
         
         _clustersConfigProvider.CreateCluster("AngularWC").Set
             .LoadBalancingPolicy(LoadBalancingPolicies.RoundRobin)
@@ -37,5 +47,12 @@ public class CustomProxyConfigProvider : IProxyConfigProvider
         var oldConfig = _config;
         _config = new CustomMemoryConfig(routes, clusters);
         oldConfig.SignalChange();
-    }    
+    }
+
+    public void Update()
+    {
+        var oldConfig = _config;
+        _config = new CustomMemoryConfig(_routesConfigProvider.ToRouteConfigList(), _clustersConfigProvider.ToClusterConfigList());
+        oldConfig.SignalChange();
+    }
 }
