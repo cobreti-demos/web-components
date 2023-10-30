@@ -1,5 +1,8 @@
 using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using WebServer.Commands;
+using WebServer.Commands.Responses;
 using WebServer.Models.ClusterConfig;
 using WebServer.Models.RouteConfig;
 using WebServer.ReverseProxy;
@@ -13,32 +16,37 @@ public class ReverseProxyController : Controller
     private IMapper _mapper;
     private IRoutesConfigProvider _routesConfigProvider;
     private IClustersConfigProvider _clustersConfigProvider;
+    private IMediator _mediator;
 
     public ReverseProxyController(
         IMapper mapper,
         IRoutesConfigProvider routesConfigProvider,
-        IClustersConfigProvider clustersConfigProvider )
+        IClustersConfigProvider clustersConfigProvider,
+        IMediator mediator)
     {
         _mapper = mapper;
         _routesConfigProvider = routesConfigProvider;
         _clustersConfigProvider = clustersConfigProvider;
+        _mediator = mediator;
     }
 
     [HttpGet("Routes/Ids")]
-    public IActionResult ListRouteIds()
+    public async Task<IActionResult> ListRouteIds()
     {
-        var routesById = _routesConfigProvider.ListRouteIds();
-
-        return Ok(routesById);
+        var response = await _mediator.Send<ListRouteIdsRequestResponse>(new ListRouteIdsRequest());
+        return Ok(response.Value);
     }
 
     [HttpGet("Routes")]
-    public IActionResult ListRoutes()
+    public async Task<IActionResult> ListRoutes()
     {
-        var routes = _routesConfigProvider.ListRoutes();
-        var routesDto = routes.Select(x => _mapper.Map<RouteConfigDto>(x));
+        var response = await _mediator.Send<ListRoutesRequestResponse>(new ListRoutesRequest());
 
-        return Ok(routesDto);
+        return Ok(response.Value);
+        // var routes = _routesConfigProvider.ListRoutes();
+        // var routesDto = routes.Select(x => _mapper.Map<RouteConfigDto>(x));
+        //
+        // return Ok(routesDto);
     }
 
     [HttpGet("Route/{id}")]
@@ -68,20 +76,16 @@ public class ReverseProxyController : Controller
     }
 
     [HttpPut("Route")]
-    public IActionResult UpdateRoute([FromBody] RouteConfigDto routeConfigDto)
+    public async Task<IActionResult> UpdateRoute([FromBody] RouteConfigDto routeConfigDto)
     {
-        try
-        {
-            var mutableRouteConfig = _mapper.Map<MutableRouteConfig>(routeConfigDto);
+        var result = await _mediator.Send<RequestResponse>(new UpdateRouteRequest(routeConfigDto));
 
-            _routesConfigProvider.Update(mutableRouteConfig);
-
-            return Ok(routeConfigDto);
-        }
-        catch (ArgumentException ex)
+        if (!result.Succeeded)
         {
-            return BadRequest(ex.Message);
+            return BadRequest(result.Error);
         }
+        
+        return Ok(routeConfigDto);
     }
 
     [HttpDelete("Route/{id}")]
@@ -124,9 +128,10 @@ public class ReverseProxyController : Controller
     }
 
     [HttpPost("routes/update")]
-    public IActionResult UpdateRoutes()
+    public async Task<IActionResult> UpdateRoutes()
     {
-        _routesConfigProvider.Update();
+        // _routesConfigProvider.Update();
+        await _mediator.Send(new UpdateRoutesRequest());
         
         return Ok();
     }
