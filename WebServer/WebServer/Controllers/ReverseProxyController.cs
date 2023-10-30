@@ -2,6 +2,7 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using WebServer.Commands;
+using WebServer.Commands.Clusters;
 using WebServer.Commands.Responses;
 using WebServer.Commands.Routes;
 using WebServer.Models.ClusterConfig;
@@ -92,45 +93,61 @@ public class ReverseProxyController : Controller
 
         return Ok();
     }
+
     
     [HttpGet("Clusters/Ids")]
-    public IActionResult ListClusterIds()
+    public async Task<IActionResult> ListClusterIds()
     {
-        var clusterIds = _clustersConfigProvider.ListClusterIds();
-        return Ok(clusterIds);
+        var response = await _mediator.Send<ListClusterIdsResponse>(new ListClusterIdsRequest());
+
+        return Ok(response.Value);
     }
 
     [HttpGet("Clusters")]
-    public IActionResult ListClusters()
+    public async Task<IActionResult> ListClusters()
     {
-        var clusters = _clustersConfigProvider.ListClusters();
-        var clustersDto = clusters.Select(x => _mapper.Map<ClusterConfigDto>(x));
+        var response = await _mediator.Send<ListClustersResponse>(new ListClustersRequest());
 
-        return Ok(clustersDto);
+        return Ok(response.Value);
     }
     
     [HttpGet("cluster/{id}")]
-    public IActionResult GetClusterById(string id)
+    public async Task<IActionResult> GetClusterById(string id)
     {
-        var clusterConfig = _clustersConfigProvider.GetClusterById(id);
-        var clusterConfigDto = _mapper.Map<ClusterConfigDto>(clusterConfig);
-        return Ok(clusterConfigDto);
+        var response = await _mediator.Send<GetClusterByIdResponse>(new GetClusterByIdRequest(id));
+
+        return Ok(response.Value);
     }
 
-    [HttpPost("routes/update")]
-    public async Task<IActionResult> UpdateRoutes()
+    [HttpPost("cluster")]
+    public async Task<IActionResult> AddCluster([FromBody] ClusterConfigDto clusterConfigDto)
     {
-        // _routesConfigProvider.Update();
-        await _mediator.Send(new UpdateRoutesRequest());
-        
-        return Ok();
+        var response = await _mediator.Send<AddClusterResponse>(new AddClusterRequest(clusterConfigDto));
+
+        if (!response.Succeeded)
+        {
+            return BadRequest(response.Error);
+        }
+
+        return Ok(response.Value);
     }
     
-    [HttpPost("clusters/update")]
-    public IActionResult UpdateClusters()
-    {
-        _clustersConfigProvider.Update();
-        
-        return Ok();
-    }
+
+    
+    // [HttpPost("routes/updateproxy")]
+    // public async Task<IActionResult> UpdateProxyRoutes()
+    // {
+    //     await _mediator.Send(new UpdateRoutesRequest());
+    //     
+    //     return Ok();
+    // }
+    //
+    //
+    // [HttpPost("clusters/update")]
+    // public IActionResult UpdateClusters()
+    // {
+    //     _clustersConfigProvider.Update();
+    //     
+    //     return Ok();
+    // }
 }

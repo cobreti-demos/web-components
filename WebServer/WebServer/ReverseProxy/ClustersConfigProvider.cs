@@ -56,5 +56,15 @@ public class ClustersConfigProvider : IClustersConfigProvider
     {
         return _clusters.Values.ToList();
     }
+
+    public void AddCluster(MutableClusterConfig clusterConfig)
+    {
+        if (_clusters.ContainsKey(clusterConfig.Id))
+        {
+            throw new ArgumentException($"Cluster with id {clusterConfig.Id} already exists");
+        }
+
+        _clusters.Add(clusterConfig.Id, clusterConfig);
+    }
 }
 
