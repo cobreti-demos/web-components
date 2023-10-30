@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace WebServer.Commands;
+namespace WebServer.Commands.Routes;
 
 public class UpdateRoutesRequest : IRequest
 {

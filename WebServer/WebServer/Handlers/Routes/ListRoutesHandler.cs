@@ -1,10 +1,10 @@
 using AutoMapper;
 using MediatR;
-using WebServer.Commands;
+using WebServer.Commands.Routes;
 using WebServer.Models.RouteConfig;
 using WebServer.ReverseProxy;
 
-namespace WebServer.Handlers;
+namespace WebServer.Handlers.Routes;
 
 public class ListRoutesHandler : IRequestHandler<ListRoutesRequest, ListRoutesRequestResponse>
 {

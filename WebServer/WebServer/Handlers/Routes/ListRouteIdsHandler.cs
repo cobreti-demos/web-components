@@ -1,9 +1,8 @@
-using AutoMapper;
 using MediatR;
-using WebServer.Commands;
+using WebServer.Commands.Routes;
 using WebServer.ReverseProxy;
 
-namespace WebServer.Handlers;
+namespace WebServer.Handlers.Routes;
 
 public class ListRouteIdsHandler : IRequestHandler<ListRouteIdsRequest, ListRouteIdsRequestResponse>
 {

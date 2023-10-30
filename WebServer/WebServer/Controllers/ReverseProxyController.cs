@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using WebServer.Commands;
 using WebServer.Commands.Responses;
+using WebServer.Commands.Routes;
 using WebServer.Models.ClusterConfig;
 using WebServer.Models.RouteConfig;
 using WebServer.ReverseProxy;
@@ -43,36 +44,27 @@ public class ReverseProxyController : Controller
         var response = await _mediator.Send<ListRoutesRequestResponse>(new ListRoutesRequest());
 
         return Ok(response.Value);
-        // var routes = _routesConfigProvider.ListRoutes();
-        // var routesDto = routes.Select(x => _mapper.Map<RouteConfigDto>(x));
-        //
-        // return Ok(routesDto);
     }
 
     [HttpGet("Route/{id}")]
-    public IActionResult GetRouteById(string id)
+    public async Task<IActionResult> GetRouteById(string id)
     {
-        var routeConfig = _routesConfigProvider.GetRouteById(id);
-        var routeConfigDto = _mapper.Map<RouteConfigDto>(routeConfig);
+        var response = await _mediator.Send<GetRouteByIdResponse>(new GetRouteByIdRequest(id));
 
-        return Ok(routeConfigDto);
+        return Ok(response.Value);
     }
 
     [HttpPost("Route")]
-    public IActionResult AddRoute([FromBody] RouteConfigDto routeConfigDto)
+    public async Task<IActionResult> AddRoute([FromBody] RouteConfigDto routeConfigDto)
     {
-        try
-        {
-            var mutableRouteConfig = _mapper.Map<MutableRouteConfig>(routeConfigDto);
+        var response = await _mediator.Send<AddRouteResponse>(new AddRouteRequest(routeConfigDto));
 
-            _routesConfigProvider.Add(mutableRouteConfig);
-
-            return Ok(routeConfigDto);
-        }
-        catch (ArgumentException ex)
+        if (!response.Succeeded)
         {
-            return BadRequest(ex.Message);
+            return BadRequest(response.Error);
         }
+
+        return Ok(response.Value);
     }
 
     [HttpPut("Route")]
@@ -89,18 +81,16 @@ public class ReverseProxyController : Controller
     }
 
     [HttpDelete("Route/{id}")]
-    public IActionResult DeleteRoute(string id)
+    public async Task<IActionResult> DeleteRoute(string id)
     {
-        try
-        {
-            _routesConfigProvider.Remove(id);
+        var response = await _mediator.Send<RequestResponse>(new DeleteRouteRequest(id));
 
-            return Ok();
-        }
-        catch (ArgumentException ex)
+        if (!response.Succeeded)
         {
-            return BadRequest(ex.Message);
+            return BadRequest(response.Error);
         }
+
+        return Ok();
     }
     
     [HttpGet("Clusters/Ids")]

@@ -2,7 +2,7 @@ using MediatR;
 using WebServer.Commands.Responses;
 using WebServer.Models.RouteConfig;
 
-namespace WebServer.Commands;
+namespace WebServer.Commands.Routes;
 
 public class ListRoutesRequestResponse : RequestResponse<IEnumerable<RouteConfigDto>>
 {

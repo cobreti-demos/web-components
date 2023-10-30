@@ -1,7 +1,7 @@
 using MediatR;
 using WebServer.Commands.Responses;
 
-namespace WebServer.Commands;
+namespace WebServer.Commands.Routes;
 
 public class ListRouteIdsRequestResponse : RequestResponse<IReadOnlyList<string>>
 {

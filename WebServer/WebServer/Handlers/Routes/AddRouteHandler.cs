@@ -1,38 +1,37 @@
 using AutoMapper;
 using MediatR;
-using WebServer.Commands;
-using WebServer.Commands.Responses;
+using WebServer.Commands.Routes;
 using WebServer.ReverseProxy;
 using WebServer.ReverseProxy.Config.Route;
 
-namespace WebServer.Handlers;
+namespace WebServer.Handlers.Routes;
 
-public class UpdateRouteHandler : IRequestHandler<UpdateRouteRequest, RequestResponse>
+public class AddRouteHandler : IRequestHandler<AddRouteRequest, AddRouteResponse>
 {
     private IRoutesConfigProvider _routesConfigProvider;
     private IMapper _mapper;
-    
-    public UpdateRouteHandler(
+
+    public AddRouteHandler(
         IRoutesConfigProvider routesConfigProvider,
-        IMapper mapper )
+        IMapper mapper)
     {
         _routesConfigProvider = routesConfigProvider;
         _mapper = mapper;
     }
     
-    public async Task<RequestResponse> Handle(UpdateRouteRequest request, CancellationToken cancellationToken)
+    public async Task<AddRouteResponse> Handle(AddRouteRequest request, CancellationToken cancellationToken)
     {
         try
         {
             var mutableRouteConfig = _mapper.Map<MutableRouteConfig>(request.RouteConfig);
 
-            _routesConfigProvider.Update(mutableRouteConfig);
+            _routesConfigProvider.Add(mutableRouteConfig);
 
-            return new RequestResponse();
+            return new AddRouteResponse(request.RouteConfig);
         }
         catch (ArgumentException ex)
         {
-            return new RequestResponse(false, ex.Message);
+            return new AddRouteResponse(false, ex.Message);
         }
     }
 }
