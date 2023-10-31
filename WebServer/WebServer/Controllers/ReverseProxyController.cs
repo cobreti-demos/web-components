@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using WebServer.Commands;
 using WebServer.Commands.Responses;
+using WebServer.Commands.ReverseProxy;
 using WebServer.Commands.ReverseProxy.Clusters;
 using WebServer.Commands.ReverseProxy.Routes;
 using WebServer.Models.ClusterConfig;
@@ -143,4 +144,12 @@ public class ReverseProxyController : Controller
         
         return Ok(response.Value);
     }
+
+    [HttpPost("refresh")]
+    public async Task<IActionResult> Refresh()
+    {
+        await _mediator.Send(new RefreshReverseProxyRequest());
+        return Ok();
+    }
 }
+
