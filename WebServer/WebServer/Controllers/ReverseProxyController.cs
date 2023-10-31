@@ -1,34 +1,22 @@
-using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using WebServer.Commands;
 using WebServer.Commands.Responses;
 using WebServer.Commands.ReverseProxy;
 using WebServer.Commands.ReverseProxy.Clusters;
 using WebServer.Commands.ReverseProxy.Routes;
 using WebServer.Models.ClusterConfig;
 using WebServer.Models.RouteConfig;
-using WebServer.Services.ReverseProxy;
 
 namespace WebServer.Controllers;
 
 [Route("[controller]")]
 public class ReverseProxyController : Controller
 {
-    private IMapper _mapper;
-    private IRoutesConfigProvider _routesConfigProvider;
-    private IClustersConfigProvider _clustersConfigProvider;
     private IMediator _mediator;
 
     public ReverseProxyController(
-        IMapper mapper,
-        IRoutesConfigProvider routesConfigProvider,
-        IClustersConfigProvider clustersConfigProvider,
         IMediator mediator)
     {
-        _mapper = mapper;
-        _routesConfigProvider = routesConfigProvider;
-        _clustersConfigProvider = clustersConfigProvider;
         _mediator = mediator;
     }
 
