@@ -131,6 +131,19 @@ public class ReverseProxyController : Controller
 
         return Ok(response.Value);
     }
+
+    [HttpPut("cluster")]
+    public async Task<IActionResult> UpdateCluster([FromBody] ClusterConfigDto clusterConfig)
+    {
+        var response = await _mediator.Send<UpdateClusterResponse>(new UpdateClusterRequest(clusterConfig));
+
+        if (!response.Succeeded)
+        {
+            return BadRequest(response.Error);
+        }
+        
+        return Ok(response.Value);
+    }
     
 
     

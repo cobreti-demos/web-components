@@ -66,5 +66,15 @@ public class ClustersConfigProvider : IClustersConfigProvider
 
         _clusters.Add(clusterConfig.Id, clusterConfig);
     }
+
+    public void UpdateCluster(MutableClusterConfig clusterConfig)
+    {
+        if (!_clusters.ContainsKey(clusterConfig.Id))
+        {
+            throw new ArgumentException($"Cluster with id {clusterConfig.Id} not found");
+        }
+
+        _clusters[clusterConfig.Id] = clusterConfig;
+    }
 }
 
