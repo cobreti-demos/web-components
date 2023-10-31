@@ -1,6 +1,6 @@
 using AutoMapper;
 using WebServer.Models.ClusterConfig;
-using WebServer.ReverseProxy.Config.Cluster;
+using WebServer.Services.ReverseProxy.Config.Cluster;
 
 namespace WebServer.AutoMapping;
 

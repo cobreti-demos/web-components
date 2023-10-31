@@ -2,13 +2,12 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using WebServer.Commands;
-using WebServer.Commands.Clusters;
 using WebServer.Commands.Responses;
-using WebServer.Commands.Routes;
+using WebServer.Commands.ReverseProxy.Clusters;
+using WebServer.Commands.ReverseProxy.Routes;
 using WebServer.Models.ClusterConfig;
 using WebServer.Models.RouteConfig;
-using WebServer.ReverseProxy;
-using WebServer.ReverseProxy.Config.Route;
+using WebServer.Services.ReverseProxy;
 
 namespace WebServer.Controllers;
 
@@ -144,23 +143,4 @@ public class ReverseProxyController : Controller
         
         return Ok(response.Value);
     }
-    
-
-    
-    // [HttpPost("routes/updateproxy")]
-    // public async Task<IActionResult> UpdateProxyRoutes()
-    // {
-    //     await _mediator.Send(new UpdateRoutesRequest());
-    //     
-    //     return Ok();
-    // }
-    //
-    //
-    // [HttpPost("clusters/update")]
-    // public IActionResult UpdateClusters()
-    // {
-    //     _clustersConfigProvider.Update();
-    //     
-    //     return Ok();
-    // }
 }

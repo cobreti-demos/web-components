@@ -2,7 +2,7 @@ using System.Reflection;
 using AutoMapper;
 using Microsoft.Extensions.FileProviders;
 using WebServer.AutoMapping;
-using WebServer.ReverseProxy;
+using WebServer.Services.ReverseProxy;
 using Yarp.ReverseProxy.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +16,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services
+    .AddSingleton<IReverseProxyChangesMonitor, ReverseProxyChangesMonitor>()
     .AddSingleton<IRoutesConfigProvider, RoutesConfigProvider>()
     .AddSingleton<IClustersConfigProvider, ClustersConfigProvider>()
     .AddSingleton<IProxyConfigProvider, CustomProxyConfigProvider>()

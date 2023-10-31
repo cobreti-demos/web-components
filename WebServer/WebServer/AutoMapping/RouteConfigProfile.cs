@@ -1,8 +1,7 @@
 using AutoMapper;
 using WebServer.Models.ClusterConfig;
 using WebServer.Models.RouteConfig;
-using WebServer.ReverseProxy.Config.Cluster;
-using WebServer.ReverseProxy.Config.Route;
+using WebServer.Services.ReverseProxy.Config.Route;
 
 namespace WebServer.AutoMapping;
 
